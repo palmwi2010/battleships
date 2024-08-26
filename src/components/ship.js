@@ -12,6 +12,10 @@ class Ship {
         this.sunk = true;
     }
 
+    isSunk() {
+        return this.sunk;
+    }
+
     hit() {
         if (!this.sunk) {
             this.numHits++;
