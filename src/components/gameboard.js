@@ -8,7 +8,7 @@ class Gameboard {
     // 2: Hit
     // Ship: Ship
 
-    constructor(size) {
+    constructor(size = 7) {
         this.size = size;
         this.board = Array.from( {length: size}, () => Array.from( {length: size}, () => 0))
         this.ships = [];
@@ -34,10 +34,14 @@ class Gameboard {
             this.board[x][y].hit();
             this.board[x][y] = 2;
             this.hits.push([x, y]);
-        } else {
+            return true;
+        } 
+        else if (this.board[x][y] === 0) {
             this.board[x][y] = 1;
             this.misses.push([x, y]);
+            return true;
         }
+        return false;
     }
 
     checkAllSunk() {

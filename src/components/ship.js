@@ -26,6 +26,4 @@ class Ship {
     }
 }
 
-//console.log(new Ship(5).hits);
-
 export default Ship

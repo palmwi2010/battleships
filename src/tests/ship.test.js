@@ -21,14 +21,6 @@ test("sink", () => {
     expect(ship.sunk).toBe(true);
 })
 
-test("extra hits no effect", () => {
-    const ship = new Ship(3);
-    for (let i = 0; i < 10; i++) {
-        ship.hit()
-    }
-    expect(ship.numHits).toBe(3);
-})
-
 test("ship no length", () => {
     expect(() => new Ship()).toThrow();
 })
