@@ -16,6 +16,10 @@ body {
     position: relative;
 }
 
+:root {
+    --box-size: 40px;
+}
+
 /* Start screen */
 .welcome-container {
     display: grid;
@@ -75,4 +79,50 @@ body {
 .welcome-btn:hover {
     cursor: pointer;
     background-color: #0ea5e9;
+}
+
+/* Grid styling */
+.box {
+    background-color: #64748b;
+    width: var(--box-size);
+    height: var(--box-size);
+    border: 1px solid black;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.inner-box {
+    width: calc(var(--box-size)/3);
+    height: calc(var(--box-size)/3);
+    background-color: #cbd5e1;
+    border-radius: 10px;
+}
+
+.grid-row {
+    display: flex;
+}
+
+.game-container {
+    display: flex;
+    gap: 200px;
+    justify-content: center;
+    margin-top: 100px;
+}
+
+.coordinate {
+    color: white;
+    width: var(--box-size);
+    height: var(--box-size);
+    text-align: center;
+    vertical-align: center;
+    line-height: var(--box-size);
+}
+
+.player-name {
+    margin-left: var(--box-size);
+    color: white;
+    margin-bottom: 10px;
+    font-weight: 100;
+    font-size: 30px;
 }
