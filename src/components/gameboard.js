@@ -38,6 +38,16 @@ class Gameboard {
         }
     }
 
+    checkAllSunk() {
+        for (let index = 0; index < this.ships.length; index++) {
+            const ship = this.ships[index];
+            if (!ship.isSunk()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     #isSpaceAvailable(x, y, length, horizontal) {
         // Find all co-ordinates
         for (let index = 0; index < length; index++) {

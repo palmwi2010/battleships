@@ -76,3 +76,14 @@ test("hitting same square doesn't sink", () => {
     expect(board.ships[0].numHits).toBe(1);
     expect(board.ships[0].isSunk()).toBe(false);
 })
+
+test("ships all sunks", () => {
+    const board = new Gameboard(5);
+    board.insertShip(1,1,3);
+    expect(board.checkAllSunk()).toBe(false);
+    board.receiveAttack(1,2);
+    board.receiveAttack(1,1);
+    expect(board.checkAllSunk()).toBe(false);
+    board.receiveAttack(1,3);
+    expect(board.checkAllSunk()).toBe(true);
+})
