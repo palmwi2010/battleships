@@ -87,3 +87,14 @@ test("ships all sunks", () => {
     board.receiveAttack(1,3);
     expect(board.checkAllSunk()).toBe(true);
 })
+
+test("hits and misses recording", () => {
+    const board = new Gameboard(5);
+    board.insertShip(1,1,3);
+    board.receiveAttack(1,2);
+    board.receiveAttack(4,4);
+    expect(board.hits[0][0]).toBe(1);
+    expect(board.hits[0][1]).toBe(2);
+    expect(board.misses[0][0]).toBe(4);
+    expect(board.misses[0][1]).toBe(4);
+})

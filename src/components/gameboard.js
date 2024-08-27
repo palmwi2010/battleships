@@ -33,8 +33,10 @@ class Gameboard {
         if (this.board[x][y] instanceof Ship) {
             this.board[x][y].hit();
             this.board[x][y] = 2;
+            this.hits.push([x, y]);
         } else {
             this.board[x][y] = 1;
+            this.misses.push([x, y]);
         }
     }
 
