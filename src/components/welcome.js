@@ -1,5 +1,6 @@
-export default function welcome(body) {
-
+export default function welcome(viewController) {
+    const body = document.querySelector("body");
+    
     const container = document.createElement("div");
     container.className = "welcome-container";
 
@@ -21,7 +22,8 @@ export default function welcome(body) {
     vsHumanButton.className = "welcome-btn";
     vsHumanButton.innerText = "Play vs Human";
 
-    vsComputerButton.addEventListener("click", () => clearWelcome(container));
+    vsComputerButton.addEventListener("click", () => startVsComputer(container, viewController));
+    vsHumanButton.addEventListener("click", () => startVsHuman(container, viewController));
 
     buttonContainer.appendChild(header);
     buttonItems.appendChild(vsComputerButton);
@@ -29,6 +31,16 @@ export default function welcome(body) {
     buttonContainer.appendChild(buttonItems);
     container.appendChild(buttonContainer);
     body.appendChild(container);
+}
+
+function startVsComputer(container, viewController) {
+    viewController.initGame(true);
+    clearWelcome(container);
+}
+
+function startVsHuman(container, viewController) {
+    viewController.initGame(false);
+    clearWelcome(container);
 }
 
 function clearWelcome(container) {
