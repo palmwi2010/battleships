@@ -1,0 +1,78 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto';
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('../assets/fonts/Roboto-Regular.ttf');
+}
+
+body {
+    height: 100vh;
+    background-color: black;
+    position: relative;
+}
+
+/* Start screen */
+.welcome-container {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../assets/welcome-background.jpeg');
+    background-position: 0 60%;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+}
+
+.welcome-exit {
+    transform: translateX(-100%); /* Slide out to the left */
+}
+
+.welcome-btn-container {
+    background-color: #082f49;
+    border-radius: 50px;
+    width: 800px;
+    height: 300px;
+    padding: 50px 20px;
+    border: none;
+    outline: none;
+    box-shadow: 2px 2px 6px 2px black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.welcome-header {
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.25ch;
+    text-align: center;
+    font-size: 40px;
+}
+
+.welcome-btn-row {
+    display: flex;
+    justify-content: space-around;
+}
+
+.welcome-btn {
+    background-color: #0284c7;
+    font-size: 24px;
+    border: none;
+    outline: none;
+    padding: 16px 32px;
+    border-radius: 20px;
+    transition-duration: 0.2s;
+    color: white;
+}
+
+.welcome-btn:hover {
+    cursor: pointer;
+    background-color: #0ea5e9;
+}
