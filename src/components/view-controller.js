@@ -1,5 +1,4 @@
-import Player from "./player";
-import welcome from "./welcome";
+import ControlsDisplay from "./constrols-display";
 import Game from "./game";
 import render from "../game-display";
 
@@ -10,7 +9,8 @@ class ViewController {
     }
 
     showLaunchScreen() {
-        welcome(this);
+        const controlsDisplay = new ControlsDisplay(this);
+        controlsDisplay.renderLaunchScreen();
     }
 
     initGame(isVsComputer) {
@@ -70,7 +70,7 @@ class ViewController {
     }
 
     declareWinner() {
-        
+
     }
 
     sendAttack(e) {
