@@ -69,11 +69,21 @@ class ViewController {
         squares.forEach(square => square.addEventListener("click", e => this.sendAttack(e)));
     }
 
+    declareWinner() {
+        
+    }
+
     sendAttack(e) {
         const box = e.currentTarget;
         const {x} = box.dataset;
         const {y} = box.dataset;
-        if (this.game.shotFired(Number(x),Number(y))) this.refreshBoard();
+        const result = this.game.shotFired(Number(x),Number(y));
+
+        if (result === Game.ShotResult.SHOT_SENT) {
+            this.refreshBoard();
+        } else if (result === Game.ShotResult.GAME_OVER) {
+            // Trigger win for current player
+        }
     }
 }
 

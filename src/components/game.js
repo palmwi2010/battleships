@@ -33,16 +33,16 @@ class Game {
         const attackedPlayer = this.turn === 1 ? this.player2:this.player1;
 
         if (attackedPlayer.board.receiveAttack(x, y)) {
+            if (attackedPlayer.board.checkAllSunk()) return Game.ShotResult.GAME_OVER;
             this.changeTurn();
-            return true;
+            return Game.ShotResult.SHOT_SENT;
         }
-        return false;
+        return Game.ShotResult.SHOT_NOT_SENT;
     }
 
     changeTurn() {
         this.turn = (this.turn === 1) ? 2:1;
         if (this.turn === 2 && this.player2.isComputer) {
-            console.log("WE GENERAITING")
             // Generate computer move
             const move = this.generateComputerMove();
             this.shotFired(move[0], move[1]);
@@ -76,6 +76,12 @@ class Game {
 
         return possibleMoves[randIndex];
     }
+
+    static ShotResult = {
+        SHOT_NOT_SENT: 0,
+        SHOT_SENT: 1,
+        GAME_OVER: 2
+    };
 }
 
 export default Game;
