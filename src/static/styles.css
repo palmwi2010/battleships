@@ -83,7 +83,6 @@ body {
 
 /* Grid styling */
 .box {
-    background-color: #64748b;
     width: var(--box-size);
     height: var(--box-size);
     border: 1px solid black;
@@ -92,7 +91,11 @@ body {
     align-items: center;
 }
 
-.inner-box {
+.box-empty {
+    background-color: #64748b;
+}
+
+.inner-box-empty {
     width: calc(var(--box-size)/3);
     height: calc(var(--box-size)/3);
     background-color: #cbd5e1;
@@ -107,7 +110,8 @@ body {
     display: flex;
     gap: 200px;
     justify-content: center;
-    margin-top: 100px;
+    padding-top: 100px;
+    box-sizing: border-box;
 }
 
 .coordinate {

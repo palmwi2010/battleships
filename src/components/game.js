@@ -13,15 +13,15 @@ class Game {
     initPlayer1() {
         this.player1.board.insertShip(0,0,2,true);
         this.player1.board.insertShip(2,1,3,true);
-        this.player1.board.insertShip(3,1,3,false);
-        this.player1.board.insertShip(6,0,4,true);
+        this.player1.board.insertShip(4,7,3,false);
+        this.player1.board.insertShip(9,0,4,true);
     }
 
     initPlayer2() {
         this.player2.board.insertShip(0,0,2,true);
         this.player2.board.insertShip(2,1,3,true);
-        this.player2.board.insertShip(3,1,3,false);
-        this.player2.board.insertShip(6,0,4,true);
+        this.player2.board.insertShip(4,7,3,false);
+        this.player2.board.insertShip(9,0,4,true);
     }
 
     init() {
@@ -39,6 +39,22 @@ class Game {
 
     changeTurn() {
         this.turn = (this.turn === 1) ? 2:1;
+    }
+
+    getActivePlayer() {
+        if (this.turn === 1) {
+            return this.player1;
+        } else {
+            return this.player2;
+        }
+    }
+
+    getOpponentPlayer() {
+        if (this.turn === 1) {
+            return this.player2;
+        } else {
+            return this.player1;
+        }
     }
 
     generateComputerMove() {

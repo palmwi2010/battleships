@@ -32,6 +32,28 @@ export default function render(boardSize) {
     body.appendChild(container);
 }
 
+function updatePlayerBoard(playerBoard) {
+    const $playerBoard = document.querySelector("#player-grid");
+    const $boxes = $playerBoard.querySelectorAll(".box");
+    let boxIndex = 0;
+
+    for (let i = 0; i < this.game.boardsize; i++) {
+        const row = activePlayer.board.board[i];
+        for (let j = 0; j < this.game.boardsize; j++) {
+            const square = row[j];
+            const $box = $boxes[boxIndex];
+            $box.className = "box";
+            if (square === 0) {
+                $box.classList.add("box-empty");
+            } else {
+                $box.classList.add("box-ship");
+            }
+            boxIndex++;
+        }
+    }
+
+}
+
 function grid(size) {
     
     const container = document.createElement("div");
@@ -50,6 +72,7 @@ function grid(size) {
         for (let j = 0; j < size; j++) {
             const box = document.createElement("div");
             box.className = "box";
+            box.classList.add("box-empty");
             const innerBox = document.createElement("div");
             innerBox.className = "inner-box";
             box.appendChild(innerBox);
