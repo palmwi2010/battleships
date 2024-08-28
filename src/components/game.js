@@ -41,7 +41,8 @@ class Game {
 
     changeTurn() {
         this.turn = (this.turn === 1) ? 2:1;
-        if (this.turn === 2 && this.isComputer) {
+        if (this.turn === 2 && this.player2.isComputer) {
+            console.log("WE GENERAITING")
             // Generate computer move
             const move = this.generateComputerMove();
             this.shotFired(move[0], move[1]);

@@ -6,8 +6,11 @@ import render from "../game-display";
 class ViewController {
 
     constructor() {
-        welcome(this);
         this.game = null;
+    }
+
+    showLaunchScreen() {
+        welcome(this);
     }
 
     initGame(isVsComputer) {
@@ -70,7 +73,7 @@ class ViewController {
         const box = e.currentTarget;
         const {x} = box.dataset;
         const {y} = box.dataset;
-        if (this.game.shotFired(x,y)) this.refreshBoard();
+        if (this.game.shotFired(Number(x),Number(y))) this.refreshBoard();
     }
 }
 
