@@ -18,6 +18,7 @@ body {
 
 :root {
     --box-size: 40px;
+    --grid-color: #64748b;
 }
 
 /* Start screen */
@@ -92,14 +93,43 @@ body {
 }
 
 .box-empty {
-    background-color: #64748b;
+    background-color: var(--grid-color);
 }
 
-.inner-box-empty {
+.box-ship {
+    background-color:var(--grid-color);
+}
+
+.box-hit {
+    background-color:var(--grid-color);
+}
+
+.box-miss {
+    background-color:var(--grid-color);
+}
+
+.box-miss > .inner-box {
+    background-color: white;
+    box-shadow: 2px 2px 6px 0 black;
+}
+
+.box-hit > .inner-box {
+    background-color: red;
+    box-shadow: 2px 2px 6px 0 black;
+}
+
+.box-ship > .inner-box {
+    background-color: #0284c7;
+    width: calc(var(--box-size)/1.5);
+    height: calc(var(--box-size)/1.5);
+    box-shadow: 2px 2px 6px 0 black;
+}
+
+.inner-box {
     width: calc(var(--box-size)/3);
     height: calc(var(--box-size)/3);
-    background-color: #cbd5e1;
-    border-radius: 10px;
+    background-color: #1e293b;
+    border-radius: 50%;
 }
 
 .grid-row {

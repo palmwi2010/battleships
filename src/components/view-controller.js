@@ -17,33 +17,64 @@ class ViewController {
             console.log("Let's play against the human.")
         }
         render(this.game.boardsize);
-        this.renderBoard();
+        this.addListeners();
+        this.refreshBoard();
     }
 
-    renderBoard() {
+    refreshBoard() {
         const $playerBoard = document.querySelector("#player-grid");
         const $opponentBoard = document.querySelector("#opponent-grid");
 
-        const activePlayer = this.game.getActivePlayer();
-        const opponentPlayer = this.game.getOpponentPlayer();
+        this.#updateBoard($playerBoard, true)
+        this.#updateBoard($opponentBoard, false)
+    }
 
-        // Function to outsource
-        const $boxes = $playerBoard.querySelectorAll(".box");
+    #updateBoard($board, isOwnBoard = true) {
+        const player = isOwnBoard ? this.game.getActivePlayer():this.game.getOpponentPlayer();
+        const $boxes = $board.querySelectorAll(".box");
         let boxIndex = 0;
+    
         for (let i = 0; i < this.game.boardsize; i++) {
-            const row = activePlayer.board.board[i];
+            const row = player.board.board[i];
             for (let j = 0; j < this.game.boardsize; j++) {
                 const square = row[j];
                 const $box = $boxes[boxIndex];
-                console.log(square);
-                if (square !== 0) {
-                    $box.style.backgroundColor = "red";
+                $box.className = "box";
+                if (square === 0) {
+                    $box.classList.add("box-empty");
+                } else if (square === 1) {
+                    $box.classList.add("box-miss");
+                } else if (square === 2) {
+                    $box.classList.add("box-hit");
+                }
+                else {
+                    if (isOwnBoard) {
+                        $box.classList.add("box-ship");
+                    } else {
+                        $box.classList.add("box-empty");
+                    }
+                        
                 }
                 boxIndex++;
             }
         }
     }
 
+    addListeners() {
+        const opponentBoard = document.querySelector("#opponent-grid");
+        const squares = opponentBoard.querySelectorAll(".box");
+        squares.forEach(square => square.addEventListener("click", e => this.sendAttack(e)));
+    }
+
+    sendAttack(e) {
+        const box = e.currentTarget;
+        const {x} = box.dataset;
+        const {y} = box.dataset;
+        const player = this.game.getOpponentPlayer();
+        player.board.receiveAttack(x, y);
+        this.game.changeTurn();
+        this.refreshBoard();
+    }
 }
 
 export default ViewController;
