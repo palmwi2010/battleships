@@ -70,10 +70,7 @@ class ViewController {
         const box = e.currentTarget;
         const {x} = box.dataset;
         const {y} = box.dataset;
-        const player = this.game.getOpponentPlayer();
-        player.board.receiveAttack(x, y);
-        this.game.changeTurn();
-        this.refreshBoard();
+        if (this.game.shotFired(x,y)) this.refreshBoard();
     }
 }
 

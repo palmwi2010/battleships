@@ -98,3 +98,18 @@ test("hits and misses recording", () => {
     expect(board.misses[0][0]).toBe(4);
     expect(board.misses[0][1]).toBe(4);
 })
+
+test("creation of possible moves", () => {
+    const board = new Gameboard(5);
+    expect(board.possibleMoves.length).toBe(25);
+    expect(board.possibleMoves[0][0]).toBe(0);
+    expect(board.possibleMoves[0][1]).toBe(0);
+})
+
+test("updating of possible moves", () => {
+    const board = new Gameboard(5);
+    board.removePossibleMove(0, 0);
+    expect(board.possibleMoves.length).toBe(24);
+    expect(board.possibleMoves[0][0]).toBe(0);
+    expect(board.possibleMoves[0][1]).toBe(1);
+})

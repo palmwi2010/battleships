@@ -34,11 +34,19 @@ class Game {
 
         if (attackedPlayer.board.receiveAttack(x, y)) {
             this.changeTurn();
+            return true;
         }
+        return false;
     }
 
     changeTurn() {
         this.turn = (this.turn === 1) ? 2:1;
+        if (this.turn === 2 && this.isComputer) {
+            // Generate computer move
+            const move = this.generateComputerMove();
+            this.shotFired(move[0], move[1]);
+            if (this.turn === 2) throw Error("Computer move wasn't successful")
+        }
     }
 
     getActivePlayer() {
@@ -59,8 +67,13 @@ class Game {
 
     generateComputerMove() {
         if (!this.player2.isComputer) throw Error("Attempting to generate a computer move with no computer players.");
-        const shots = this.player1.board.misses.concat(this.player1.board.hits);
-        return shots;
+        const opponentBoard = this.player1.board;
+        const {possibleMoves} = opponentBoard;
+
+        if (possibleMoves.length === 0) return Error("No more possible moves remaining!");
+        const randIndex = Math.floor(Math.random() * possibleMoves.length);
+
+        return possibleMoves[randIndex];
     }
 }
 

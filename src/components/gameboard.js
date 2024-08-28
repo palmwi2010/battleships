@@ -14,6 +14,7 @@ class Gameboard {
         this.ships = [];
         this.hits = [];
         this.misses = [];
+        this.possibleMoves = this.#generatePossibleMoves();
     }
 
     insertShip(x, y, length, horizontal = true) {
@@ -34,11 +35,13 @@ class Gameboard {
             this.board[x][y].hit();
             this.board[x][y] = 2;
             this.hits.push([x, y]);
+            this.removePossibleMove(x, y);
             return true;
         } 
         else if (this.board[x][y] === 0) {
             this.board[x][y] = 1;
             this.misses.push([x, y]);
+            this.removePossibleMove(x, y);
             return true;
         }
         return false;
@@ -83,6 +86,21 @@ class Gameboard {
             this.board[x_][y_] = ship;
         }
         this.ships.push(ship);
+    }
+
+    #generatePossibleMoves() {
+        const possibleMoves = [];
+        for (let i = 0; i < this.size; i ++) {
+            for (let j = 0; j < this.size; j++) {
+                possibleMoves.push([i, j]);
+            }
+        }
+        return possibleMoves;
+    }
+
+    removePossibleMove(x, y) {
+        const index = this.possibleMoves.findIndex(coord => coord[0] === x && coord[1] === y);
+        this.possibleMoves.splice(index, 1);
     }
 }
 
