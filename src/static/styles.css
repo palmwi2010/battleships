@@ -116,6 +116,20 @@ body {
     justify-content: center;
 }
 
+/* Header styling */
+.top-banner {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 0;
+}
+
+.battleships-header {
+    height: 200px;
+    width: 1000px;
+    border-radius: 40px;
+}
+
 /* Grid styling */
 .box {
     width: var(--box-size);
@@ -174,7 +188,7 @@ body {
     display: flex;
     gap: 200px;
     justify-content: center;
-    padding-top: 100px;
+    padding-top: 20px;
     box-sizing: border-box;
 }
 

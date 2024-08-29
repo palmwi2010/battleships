@@ -23,7 +23,6 @@ class ViewController {
         render(this.game.boardsize);
         this.addListeners();
         this.refreshBoard();
-        //setTimeout(() => this.showGameOver(), 500);
     }
 
     refreshBoard() {

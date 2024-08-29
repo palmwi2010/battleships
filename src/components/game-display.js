@@ -1,3 +1,5 @@
+import battleshipsHeader from "../assets/battleshipsHeaderSmall.webp";
+
 export default function render(boardSize) {
     const body = document.querySelector("body");
     
@@ -29,6 +31,7 @@ export default function render(boardSize) {
 
     container.appendChild(playerSide);
     container.appendChild(opponentSide);
+    body.appendChild(renderHeader())
     body.appendChild(container);
 }
 
@@ -77,6 +80,18 @@ function columnCoordinate(index) {
     columnCoordinate.classList.add("coordinate");
     if (index != undefined) columnCoordinate.textContent = index;
     return columnCoordinate;
+}
+
+function renderHeader() {
+    const banner = document.createElement('div');
+    banner.className = 'top-banner';
+
+    const header = document.createElement('img');
+    header.className = 'battleships-header';
+    header.src = battleshipsHeader;
+
+    banner.appendChild(header);
+    return banner;
 }
 
 function navalBase() {
