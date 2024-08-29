@@ -102,6 +102,10 @@ class ViewController {
             }
         }
     }
+
+    openShipDeploy() {
+        
+    }
 }
 
 export default ViewController;
