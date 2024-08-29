@@ -16,7 +16,7 @@ body {
     position: relative;
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
-    grid-template-rows: 2fr 5fr 1fr;
+    grid-template-rows: 4fr 10fr 3fr;
 }
 
 :root {
@@ -210,8 +210,6 @@ body {
     border-radius: 50%;
 }
 
-
-
 /* Game sizing */
 
 .game-container {
@@ -228,8 +226,6 @@ body {
     flex:1;
 }
 
-
-
 .player-name {
     margin-left: var(--box-size);
     color: white;
@@ -238,7 +234,53 @@ body {
     font-size: 30px;
 }
 
-/* Game over dialog */
-.game-dialog {
+/* Gallery */
+.gallery {
+    padding: 40px 16px;
+    background-color: gray;
+    grid-row: 2/3;
+    width: max(fit-content, 400px);
+    margin: 100px auto;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    font-size: 30px;
+    font-weight: 700;
+    gap:40px;
+    height:500px;
+}
 
+.ship {
+    background-color: #0284c7;
+    display: flex;
+    width: fit-content;
+    gap: 30px;
+    padding: 10px 30px;
+    border-radius: 20%;
+}
+
+.ship:hover {
+    cursor: pointer;
+}
+
+/* Buttons */
+.button-container {
+    grid-row: 3/4;
+    grid-column: 2/3;
+    margin: 0 auto;
+}
+
+.start-btn {
+    padding: 20px 48px;
+    border-radius: 20px;
+    font-size: 32px;
+    border: none;
+    outline: none;
+    background-color: green;
+    color: white;
+    font-weight: 700;
+}
+
+.start-btn:hover {
+    cursor: pointer;
 }

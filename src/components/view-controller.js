@@ -69,6 +69,7 @@ class ViewController {
     }
 
     addListeners() {
+        // Squares
         const opponentBoard = document.querySelector("#opponent-grid");
         const squares = opponentBoard.querySelectorAll(".box");
         squares.forEach(square => square.addEventListener("click", e => this.sendAttack(e)));

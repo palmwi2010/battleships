@@ -31,7 +31,9 @@ export default function render(boardSize) {
 
     container.appendChild(playerSide);
     container.appendChild(opponentSide);
-    body.appendChild(renderHeader())
+    body.appendChild(renderGallery());
+    body.appendChild(renderHeader());
+    body.appendChild(renderButtons());
     body.appendChild(container);
 }
 
@@ -94,18 +96,43 @@ function renderHeader() {
     return banner;
 }
 
-function navalBase() {
-    const container = document.createElement("div");
-    container.className = "naval-base";
+function renderGallery() {
+    const gallery = document.createElement("div");
+    gallery.className = "gallery";
+    gallery.textContent = "Naval base";
+
+    const ships = [2, 3, 3, 4, 5];
+
+    for (let index = 0; index < ships.length; index++) {
+        const ship = ships[index];
+        const $ship = renderShip(ship);
+        gallery.appendChild($ship);
+    }
+    return gallery;
 }
 
-function renderShip(size) {
+function renderShip(holes) {
     const container = document.createElement("div");
     container.className = "ship";
+    container.setAttribute("data-ship", holes);
 
-    for (let i = 0; i < size; i++) {
-        const box = document.createElement("div");
-        box.className = "ship-box";
-        container.appendChild("")
+    for (let i = 0; i < holes; i++) {
+        const hole = document.createElement('div');
+        hole.className = "inner-box";
+        container.appendChild(hole);
     }
+    return container;
+}
+
+function renderButtons() {
+    const container = document.createElement("div");
+    container.className = "button-container";
+
+    const startButton = document.createElement("button")
+    startButton.textContent = "Start game";
+    startButton.className = "start-btn";
+
+    container.appendChild(startButton);
+
+    return container;
 }
