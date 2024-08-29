@@ -25,14 +25,14 @@ class ControlsDisplay {
         body.appendChild(this.container);
     }
 
-    renderGameOver() {
+    renderGameOver(gameResult = 0) {
         const $body = document.querySelector('body');
         const $dialog = document.createElement("dialog");
         $dialog.className = "game-dialog";
     
         const $header = document.createElement("h3");
         $header.className = "dialog-header";
-        $header.textContent = "Game over!";
+        $header.textContent = ControlsDisplay.#generateHeader(gameResult);
     
         const $subheader = document.createElement("h5");
         $subheader.className = "dialog-subheader";
@@ -47,6 +47,28 @@ class ControlsDisplay {
         $body.appendChild($dialog);
 
         return $dialog;
+    }
+
+    static #generateHeader(gameResult) {
+        const resultMap = ControlsDisplay.gameResult;
+
+        switch (gameResult) {
+            case resultMap.GAME_ENDED:
+                return "Game ended!";
+            case resultMap.P1_WINS:
+                return "Player 1 wins!";
+            case resultMap.P2_WINS:
+                return "Player 2 wins!";
+            case resultMap.COMPUTER_WINS:
+                return "Computer wins!"
+        }
+    }
+
+    static gameResult = {
+        GAME_ENDED: 0,
+        P1_WINS: 1,
+        P2_WINS: 2,
+        COMPUTER_WINS: 3
     }
 
     #renderButtons() {

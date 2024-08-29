@@ -1,6 +1,6 @@
 import ControlsDisplay from "./controls-display";
 import Game from "./game";
-import render from "../game-display";
+import render from "./game-display";
 
 class ViewController {
 
@@ -15,7 +15,7 @@ class ViewController {
 
     initGame(isVsComputer) {
         if (isVsComputer) {
-            if (this.game) this.#clearGame();
+            if (this.game) ViewController.#clearGame();
             this.game = new Game();
         } else {
             console.log("Let's play against the human.")
@@ -23,7 +23,7 @@ class ViewController {
         render(this.game.boardsize);
         this.addListeners();
         this.refreshBoard();
-        setTimeout(() => this.showGameOver(), 5000);
+        //setTimeout(() => this.showGameOver(), 500);
     }
 
     refreshBoard() {
@@ -34,7 +34,7 @@ class ViewController {
         this.#updateBoard($opponentBoard, false)
     }
 
-    #clearGame() {
+    static #clearGame() {
         const body = document.querySelector("body");
         body.innerHTML = "";
     }
@@ -75,9 +75,9 @@ class ViewController {
         squares.forEach(square => square.addEventListener("click", e => this.sendAttack(e)));
     }
 
-    showGameOver() {
+    showGameOver(gameResult) {
         const controlsDisplay = new ControlsDisplay(this);
-        const dialog = controlsDisplay.renderGameOver();
+        const dialog = controlsDisplay.renderGameOver(gameResult);
         dialog.showModal();
     }
 
@@ -90,7 +90,16 @@ class ViewController {
         if (result === Game.ShotResult.SHOT_SENT) {
             this.refreshBoard();
         } else if (result === Game.ShotResult.GAME_OVER) {
-            // Trigger win for current player
+            // Handle end game display
+            if (this.game.turn === 1) {
+                this.showGameOver(ControlsDisplay.gameResult.P1_WINS)
+            } else {
+                if (this.game.player2.isComputer) {
+                    this.showGameOver(ControlsDisplay.gameResult.COMPUTER_WINS);
+                } else {
+                    this.showGameOver(ControlsDisplay.gameResult.P2_WINS);
+                }
+            }
         }
     }
 }
