@@ -25,6 +25,30 @@ class ControlsDisplay {
         body.appendChild(this.container);
     }
 
+    renderGameOver() {
+        const $body = document.querySelector('body');
+        const $dialog = document.createElement("dialog");
+        $dialog.className = "game-dialog";
+    
+        const $header = document.createElement("h3");
+        $header.className = "dialog-header";
+        $header.textContent = "Game over!";
+    
+        const $subheader = document.createElement("h5");
+        $subheader.className = "dialog-subheader";
+        $subheader.textContent = "Play again?";
+
+        const $buttonItems = this.#renderButtons();
+
+        $dialog.appendChild($header);
+        $dialog.appendChild($subheader);
+        $dialog.appendChild($buttonItems);
+
+        $body.appendChild($dialog);
+
+        return $dialog;
+    }
+
     #renderButtons() {
         const buttonItems = document.createElement("div");
         buttonItems.className = "welcome-btn-row";
@@ -46,6 +70,7 @@ class ControlsDisplay {
     }
 
     #startVsComputer() {
+        console.log(this.viewController);
         this.viewController.initGame(true);
         this.#clearWelcome();
     }
@@ -56,11 +81,13 @@ class ControlsDisplay {
     }
 
     #clearWelcome() {
-        this.container.classList.add("welcome-exit");
+        if (this.container.classList.contains("welcome-container")) {
+            this.container.classList.add("welcome-exit");
             // Wait for the transition to complete before removing the element
             setTimeout(() => {
                 this.container.remove();
             }, 1000);
+        }
     }
 }
 

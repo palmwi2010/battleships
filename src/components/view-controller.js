@@ -1,4 +1,4 @@
-import ControlsDisplay from "./constrols-display";
+import ControlsDisplay from "./controls-display";
 import Game from "./game";
 import render from "../game-display";
 
@@ -15,6 +15,7 @@ class ViewController {
 
     initGame(isVsComputer) {
         if (isVsComputer) {
+            if (this.game) this.#clearGame();
             this.game = new Game();
         } else {
             console.log("Let's play against the human.")
@@ -22,6 +23,7 @@ class ViewController {
         render(this.game.boardsize);
         this.addListeners();
         this.refreshBoard();
+        setTimeout(() => this.showGameOver(), 5000);
     }
 
     refreshBoard() {
@@ -30,6 +32,11 @@ class ViewController {
 
         this.#updateBoard($playerBoard, true)
         this.#updateBoard($opponentBoard, false)
+    }
+
+    #clearGame() {
+        const body = document.querySelector("body");
+        body.innerHTML = "";
     }
 
     #updateBoard($board, isOwnBoard = true) {
@@ -55,8 +62,7 @@ class ViewController {
                         $box.classList.add("box-ship");
                     } else {
                         $box.classList.add("box-empty");
-                    }
-                        
+                    }  
                 }
                 boxIndex++;
             }
@@ -69,8 +75,10 @@ class ViewController {
         squares.forEach(square => square.addEventListener("click", e => this.sendAttack(e)));
     }
 
-    declareWinner() {
-
+    showGameOver() {
+        const controlsDisplay = new ControlsDisplay(this);
+        const dialog = controlsDisplay.renderGameOver();
+        dialog.showModal();
     }
 
     sendAttack(e) {
