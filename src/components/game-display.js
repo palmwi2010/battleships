@@ -83,11 +83,11 @@ function columnCoordinate(index) {
 }
 
 function renderHeader() {
-    const banner = document.createElement('div');
-    banner.className = 'top-banner';
+    const banner = document.createElement("div");
+    banner.className = "top-banner";
 
-    const header = document.createElement('img');
-    header.className = 'battleships-header';
+    const header = document.createElement("img");
+    header.className = "battleships-header";
     header.src = battleshipsHeader;
 
     banner.appendChild(header);

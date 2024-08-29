@@ -27,6 +27,7 @@ body {
     justify-content: center;
     align-items: center;
     background-image: url('../assets/welcome-background.jpeg');
+    background-size: cover;
     background-position: 0 60%;
     height: 100%;
     position: absolute;
@@ -144,6 +145,10 @@ body {
     background-color: var(--grid-color);
 }
 
+.box-empty:hover {
+    cursor: pointer;
+}
+
 .box-ship {
     background-color:var(--grid-color);
 }
@@ -183,6 +188,8 @@ body {
 .grid-row {
     display: flex;
 }
+
+/* Game sizing */
 
 .game-container {
     display: flex;
