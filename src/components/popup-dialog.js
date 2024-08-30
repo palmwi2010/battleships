@@ -36,11 +36,11 @@ export default function PopupDialog(controller) {
     }
 
     function startVsComputer() {
-        controller.initGame(true);
+        controller.initDeployment();
     }
 
     function startVsHuman() {
-        controller.initGame(false);
+        controller.initDeployment();
     }
 
     return { renderLaunchScreen }

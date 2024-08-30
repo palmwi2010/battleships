@@ -5,6 +5,7 @@ import Events from "./ship-deployment";
 import Banner from "./banner";
 import GameControls from "./game-controls";
 import Welcome from "./welcome";
+import Main from "./main";
 
 class ViewController {
 
@@ -14,14 +15,25 @@ class ViewController {
         this.events = null;
         this.banner = Banner();
         this.gameControls = GameControls(this);
-        this.welcome = Welcome(this);
+        this.main = Main(this);
         this.body = document.querySelector('body');
+        this.deploymentPhase = true;
     }
 
     showLaunchScreen() {
-        //const controlsDisplay = new ControlsDisplay(this);
-        //controlsDisplay.renderLaunchScreen();
-        this.body.appendChild(this.welcome.render());
+        const welcome = Welcome(this);
+        this.body.appendChild(welcome.render());
+    }
+
+    renderGame() {
+        this.game = new Game();
+        this.body.appendChild(this.banner.render())
+        this.body.appendChild(this.main.render())
+        this.body.appendChild(this.gameControls.render())
+    }
+
+    initDeployment() {
+        this.renderGame();
     }
 
     initGame(isVsComputer) {

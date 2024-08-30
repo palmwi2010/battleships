@@ -237,7 +237,7 @@ body {
 }
 
 .player-name {
-    margin-left: var(--box-size);
+    /* margin-left: var(--box-size); */
     color: white;
     margin-bottom: 10px;
     font-weight: 100;
@@ -246,27 +246,34 @@ body {
 
 /* Gallery */
 .gallery {
-    padding: 40px 16px;
-    background-color: gray;
-    grid-row: 2/3;
+    padding: 16px;
+    background-color: var(--grid-color);
     width: max(fit-content, 400px);
-    margin: 100px auto;
+    max-width: 550px;
     border-radius: 20px;
     display: flex;
     flex-direction: column;
     font-size: 30px;
     font-weight: 700;
-    gap:40px;
-    height:500px;
+    gap:20px;
+    aspect-ratio: 1/1;
 }
 
-.ship {
-    background-color: #0284c7;
+.ship, .ship-empty {
     display: flex;
     width: fit-content;
     gap: 30px;
     padding: 10px 30px;
     border-radius: 20%;
+}
+
+.ship {
+    background-color: #0284c7;
+}
+
+.ship.ship-empty {
+    background-color: transparent;
+    border: 2px dashed black;
 }
 
 .ship:hover {

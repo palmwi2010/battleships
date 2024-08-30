@@ -3,12 +3,14 @@ import Player from "./player";
 class Game {
 
     constructor() {
-        this.boardsize = 10;
+        this.boardsize = Game.boardSize;
         this.player1 = new Player(false, this.boardsize);
         this.player2 = new Player(true, this.boardsize);
         this.turn = 1;
         this.init()
     }
+
+    static boardSize = 10;
 
     initPlayer1() {
         this.player1.board.insertShip(0,0,2,true);
