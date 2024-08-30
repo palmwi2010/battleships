@@ -1,0 +1,5 @@
+TODOs:
+* Need to add methods for start and restart game to button component
+
+2 player notes:
+* Button component will need to be updated for deployment stage.

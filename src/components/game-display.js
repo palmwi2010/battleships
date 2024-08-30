@@ -1,4 +1,4 @@
-import battleshipsHeader from "../assets/battleshipsHeaderSmall.webp";
+import battleshipsHeader from "../assets/battleshipsHeader.webp";
 import Player from "./player";
 
 export default function render(boardSize) {

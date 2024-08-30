@@ -2,6 +2,9 @@ import ControlsDisplay from "./controls-display";
 import Game from "./game";
 import render from "./game-display";
 import Events from "./ship-deployment";
+import Banner from "./banner";
+import GameControls from "./game-controls";
+import Welcome from "./welcome";
 
 class ViewController {
 
@@ -9,11 +12,16 @@ class ViewController {
         this.game = null;
         this.selectedShip = null;
         this.events = null;
+        this.banner = Banner();
+        this.gameControls = GameControls(this);
+        this.welcome = Welcome(this);
+        this.body = document.querySelector('body');
     }
 
     showLaunchScreen() {
-        const controlsDisplay = new ControlsDisplay(this);
-        controlsDisplay.renderLaunchScreen();
+        //const controlsDisplay = new ControlsDisplay(this);
+        //controlsDisplay.renderLaunchScreen();
+        this.body.appendChild(this.welcome.render());
     }
 
     initGame(isVsComputer) {
