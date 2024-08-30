@@ -1,4 +1,5 @@
 import battleshipsHeader from "../assets/battleshipsHeaderSmall.webp";
+import Player from "./player";
 
 export default function render(boardSize) {
     const body = document.querySelector("body");
@@ -101,7 +102,7 @@ function renderGallery() {
     gallery.className = "gallery";
     gallery.textContent = "Naval base";
 
-    const ships = [2, 3, 3, 4, 5];
+    const ships = Player.startingShips;
 
     for (let index = 0; index < ships.length; index++) {
         const ship = ships[index];
