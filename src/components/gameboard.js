@@ -23,7 +23,7 @@ class Gameboard {
         if (length < 1 || length >= this.size) throw Error("Length must be positive and less than board size.")
 
         // Check no other ships in this space
-        if (!this.#isSpaceAvailable(x, y, length, horizontal)) return false;
+        if (!this.isSpaceAvailable(x, y, length, horizontal)) return false;
 
         // Create and insert new ship
         this.#updateBoardWithShip(x,y,length,horizontal);
@@ -57,7 +57,7 @@ class Gameboard {
         return true;
     }
 
-    #isSpaceAvailable(x, y, length, horizontal) {
+    isSpaceAvailable(x, y, length, horizontal) {
         // Find all co-ordinates
         for (let index = 0; index < length; index++) {
             const x_ = x + (horizontal ? 0:index);
@@ -65,13 +65,11 @@ class Gameboard {
 
             // Check not out of bounds
             if (x_ >= this.size || y_ >= this.size) {
-                console.log("Attempting to insert a ship out of bounds");
                 return false;
             }
 
             // Check no other ships
             if (this.board[x_][y_] instanceof Ship) {
-                console.log("Attempting to overwrite another ship.")
                 return false;
             }
         }
