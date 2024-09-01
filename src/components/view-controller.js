@@ -41,53 +41,13 @@ class ViewController {
     initGame() {
         //this.events = new Events(this.game, this.refreshBoard.bind(this));
         this.changeDeploymentPhase();
-        this.refreshBoard();
+        this.main.refreshBoard();
         //this.addListeners();
     }
 
     changeDeploymentPhase() {
         this.deploymentPhase = false;
         this.main.render();
-    }
-
-    refreshBoard() {
-        const $playerBoard = document.querySelector("#player-grid");
-        const $opponentBoard = document.querySelector("#opponent-grid");
-
-        this.#updateBoard($playerBoard, true)
-        this.#updateBoard($opponentBoard, false)
-    }
-
-    #updateBoard($board, isOwnBoard = true) {
-        this.main.updateBoard();
-        /*
-        const player = isOwnBoard ? this.game.getActivePlayer():this.game.getOpponentPlayer();
-        const $boxes = $board.querySelectorAll(".box");
-        let boxIndex = 0;
-    
-        for (let i = 0; i < this.game.boardsize; i++) {
-            const row = player.board.board[i];
-            for (let j = 0; j < this.game.boardsize; j++) {
-                const square = row[j];
-                const $box = $boxes[boxIndex];
-                $box.className = "box";
-                if (square === 0) {
-                    $box.classList.add("box-empty");
-                } else if (square === 1) {
-                    $box.classList.add("box-miss");
-                } else if (square === 2) {
-                    $box.classList.add("box-hit");
-                }
-                else {
-                    if (isOwnBoard) {
-                        $box.classList.add("box-ship");
-                    } else {
-                        $box.classList.add("box-empty");
-                    }  
-                }
-                boxIndex++;
-            }
-        }*/
     }
 
     addListeners() {
@@ -117,7 +77,7 @@ class ViewController {
         const result = this.game.shotFired(Number(x),Number(y));
 
         if (result === Game.ShotResult.SHOT_SENT) {
-            this.refreshBoard();
+            this.main.refreshBoard();
         } else if (result === Game.ShotResult.GAME_OVER) {
             // Handle end game display
             if (this.game.turn === 1) {

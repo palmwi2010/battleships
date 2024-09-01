@@ -161,41 +161,11 @@ body {
     display: grid;
     justify-content: center;
     align-items: center;
-}
-
-.box-empty.box-free {
-    background-color: rgba(34, 197, 94, 0.8);
-}
-
-.coordinate {
-    color: white;
-    text-align: center;
-    vertical-align: center;
-    line-height: var(--box-size);
-    font-size: 18px;
-    font-weight: 700;
-    cursor: alias;
-    user-select: none;
-}
-
-.box-empty {
     background-color: var(--grid-color);
 }
 
-.box-empty:hover {
-    cursor: pointer;
-}
-
-.box-ship {
-    background-color:var(--grid-color);
-}
-
-.box-hit {
-    background-color:var(--grid-color);
-}
-
-.box-miss {
-    background-color:var(--grid-color);
+.box.box-free {
+    background-color: rgba(34, 197, 94, 0.8);
 }
 
 .box-miss > .inner-box {
@@ -222,8 +192,18 @@ body {
     border-radius: 50%;
 }
 
-/* Game sizing */
+.coordinate {
+    color: white;
+    text-align: center;
+    vertical-align: center;
+    line-height: var(--box-size);
+    font-size: 18px;
+    font-weight: 700;
+    cursor: alias;
+    user-select: none;
+}
 
+/* Game sizing */
 .game-container {
     grid-column: 2/3;
     display: flex;

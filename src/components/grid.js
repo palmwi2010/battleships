@@ -4,6 +4,7 @@ export default function Grid(controller) {
 
     const container = document.createElement("div");
     const size = Game.boardSize;
+    const $boxes = [];
     render();
 
     function render() {
@@ -22,13 +23,13 @@ export default function Grid(controller) {
             for (let j = 0; j < size; j++) {
                 const box = document.createElement("div");
                 box.className = "box";
-                box.classList.add("box-empty");
                 box.setAttribute("data-x", i);
                 box.setAttribute("data-y", j);
                 const innerBox = document.createElement("div");
                 innerBox.className = "inner-box";
                 box.appendChild(innerBox);
                 row.appendChild(box);
+                $boxes.push(box); //NEW
             }
             container.appendChild(row);
         }
@@ -40,30 +41,25 @@ export default function Grid(controller) {
     }
 
     function updateGrid(player, isOwnBoard) {
-        const $boxes = container.querySelectorAll(".box");
-        let boxIndex = 0;
-    
-        for (let i = 0; i < controller.game.boardsize; i++) {
-            const row = player.board.board[i];
-            for (let j = 0; j < controller.game.boardsize; j++) {
-                const square = row[j];
-                const $box = $boxes[boxIndex];
-                $box.className = "box";
-                if (square === 0) {
-                    $box.classList.add("box-empty");
-                } else if (square === 1) {
+        const newState = player.board.board.flat();
+
+        for (let i = 0; i < newState.length; i++) {
+            const square = newState[i];
+            const $box = $boxes[i]; 
+            $box.className = "box"; // Reset class name
+
+            switch(square) {
+                case 0:
+                    break;
+                case 1: 
                     $box.classList.add("box-miss");
-                } else if (square === 2) {
+                    break;
+                case 2:
                     $box.classList.add("box-hit");
-                }
-                else {
-                    if (isOwnBoard) {
-                    $box.classList.add("box-ship");
-                    } else {
-                        $box.classList.add("box-empty");
-                    }  
-                }
-                boxIndex++;
+                    break;
+                default:
+                    if (isOwnBoard) $box.classList.add("box-ship");
+                    break;
             }
         }
     }

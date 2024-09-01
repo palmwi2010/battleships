@@ -50,10 +50,10 @@ export default function Main(controller) {
         return side;
     }
 
-    function updateBoard() {
+    function refreshBoard() {
         playerGrid.updateGrid(controller.game.getActivePlayer(), true);
         opponentGrid.updateGrid(controller.game.getOpponentPlayer(), false);
     }
 
-    return { render, updateBoard }
+    return { render, refreshBoard }
 }
