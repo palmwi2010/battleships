@@ -2,8 +2,10 @@ import Player from "./player";
 
 export default function Gallery() {
 
+    const gallery = document.createElement("div");
+    render();
+
     function render() {
-        const gallery = document.createElement("div");
         gallery.className = "gallery";
 
         const topGallery = document.createElement("div");
@@ -23,6 +25,9 @@ export default function Gallery() {
         }
         gallery.appendChild(topGallery);
         gallery.appendChild(bottomGallery);
+    }
+
+    function getContainer() {
         return gallery;
     }
 
@@ -44,5 +49,5 @@ export default function Gallery() {
         return container;
     }
 
-    return { render }
+    return { render, getContainer }
 }

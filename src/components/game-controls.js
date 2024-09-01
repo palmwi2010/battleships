@@ -10,6 +10,8 @@ export default function GameControls(controller) {
         startButton = document.createElement("button")
         startButton.textContent = startTxt;
         startButton.className = "start-btn";
+
+        activateButton();
     
         container.appendChild(startButton);
         return container;
@@ -30,11 +32,13 @@ export default function GameControls(controller) {
     }
 
     function startGame() {
-        //TODO Call controller to start the game
+        controller.initGame();
+        toggleButton();
     }
 
     function restartGame() {
         // TODO Call controller to restart the game
+        toggleButton();
     }
 
     function toggleButton() {
@@ -43,8 +47,10 @@ export default function GameControls(controller) {
             startButton.addEventListener('click', restartGame);
             startButton.textContent = restartTxt;
         } else {
+            startButton.removeEventListener('click', restartGame);
             startButton.textContent = startTxt;
-            startButton.className = "active-btn";
+            startButton.className = "start-btn";
+            activateButton();
         }
     }
 

@@ -1,6 +1,5 @@
 import ControlsDisplay from "./controls-display";
 import Game from "./game";
-import render from "./game-display";
 import Events from "./ship-deployment";
 import Banner from "./banner";
 import GameControls from "./game-controls";
@@ -28,6 +27,7 @@ class ViewController {
     }
 
     renderGame() {
+        //TODO - Set for if vs human and control for re deployment
         this.game = new Game();
         this.body.appendChild(this.banner.render())
         this.body.appendChild(this.main.render())
@@ -38,17 +38,16 @@ class ViewController {
         this.renderGame();
     }
 
-    initGame(isVsComputer) {
-        if (isVsComputer) {
-            if (this.game) ViewController.#clearGame();
-            this.game = new Game();
-            this.events = new Events(this.game, this.refreshBoard.bind(this));
-        } else {
-            console.log("Let's play against the human.")
-        }
-        //render(this.game.boardsize);
-        this.addListeners();
+    initGame() {
+        //this.events = new Events(this.game, this.refreshBoard.bind(this));
+        this.changeDeploymentPhase();
         this.refreshBoard();
+        //this.addListeners();
+    }
+
+    changeDeploymentPhase() {
+        this.deploymentPhase = false;
+        this.main.render();
     }
 
     refreshBoard() {
@@ -57,11 +56,6 @@ class ViewController {
 
         this.#updateBoard($playerBoard, true)
         this.#updateBoard($opponentBoard, false)
-    }
-
-    static #clearGame() {
-        const body = document.querySelector("body");
-        body.innerHTML = "";
     }
 
     #updateBoard($board, isOwnBoard = true) {

@@ -4,11 +4,19 @@ import Gallery from "./gallery";
 
 export default function Main(controller) {
 
-    const grid = Grid(Game.boardSize);
+    const playerGrid = Grid(Game.boardSize);
+    const opponentGrid = Grid(Game.boardSize);
     const gallery = Gallery();
 
+    const container = document.createElement("div");
+
     function render() {
-        const container = document.createElement("div");
+        
+        // Remove any existing children
+        while (container.firstChild) {
+            container.removeChild(container.firstChild);
+        }
+
         container.className = "game-container";
 
         const leftSide = controller.deploymentPhase ? "Gallery":"Player";
@@ -31,10 +39,13 @@ export default function Main(controller) {
 
         let $main;
         if (player === "Gallery") {
-            $main = gallery.render();
+            $main = gallery.getContainer();
+        } else if (player === "Player") {
+            $main = playerGrid.getContainer();
+            $main.id = "player-grid";
         } else {
-            $main = grid.render();
-            $main.id = `${player.toLowerCase()}-grid`;
+            $main = opponentGrid.getContainer();
+            $main.id = "opponent-grid";
         }
 
         header.textContent = player;

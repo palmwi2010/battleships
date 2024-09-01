@@ -1,7 +1,9 @@
 export default function Grid(size) {
 
+    const container = document.createElement("div");
+    render();
+
     function render() {
-        const container = document.createElement("div");
         container.className = "grid-container";
 
         const rowColCoordinates = document.createElement("div");
@@ -28,6 +30,9 @@ export default function Grid(size) {
             container.appendChild(row);
         }
         container.appendChild(rowColCoordinates);
+    }
+
+    function getContainer() {
         return container;
     }
 
@@ -46,5 +51,5 @@ export default function Grid(size) {
         return columnCoordinate;
     }
 
-    return { render }
+    return { render, getContainer }
 }
