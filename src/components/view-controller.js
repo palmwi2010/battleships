@@ -6,6 +6,7 @@ import Banner from "./banner";
 import GameControls from "./game-controls";
 import Welcome from "./welcome";
 import Main from "./main";
+import bodyBackground from "../assets/battle-background.webp";
 
 class ViewController {
 
@@ -17,6 +18,7 @@ class ViewController {
         this.gameControls = GameControls(this);
         this.main = Main(this);
         this.body = document.querySelector('body');
+        this.body.style.backgroundImage = `url(${bodyBackground})`;
         this.deploymentPhase = true;
     }
 
@@ -44,7 +46,7 @@ class ViewController {
         } else {
             console.log("Let's play against the human.")
         }
-        render(this.game.boardsize);
+        //render(this.game.boardsize);
         this.addListeners();
         this.refreshBoard();
     }
