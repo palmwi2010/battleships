@@ -1,6 +1,9 @@
-export default function Grid(size) {
+import Game from "./game";
+
+export default function Grid(controller) {
 
     const container = document.createElement("div");
+    const size = Game.boardSize;
     render();
 
     function render() {
@@ -36,6 +39,35 @@ export default function Grid(size) {
         return container;
     }
 
+    function updateGrid(player, isOwnBoard) {
+        const $boxes = container.querySelectorAll(".box");
+        let boxIndex = 0;
+    
+        for (let i = 0; i < controller.game.boardsize; i++) {
+            const row = player.board.board[i];
+            for (let j = 0; j < controller.game.boardsize; j++) {
+                const square = row[j];
+                const $box = $boxes[boxIndex];
+                $box.className = "box";
+                if (square === 0) {
+                    $box.classList.add("box-empty");
+                } else if (square === 1) {
+                    $box.classList.add("box-miss");
+                } else if (square === 2) {
+                    $box.classList.add("box-hit");
+                }
+                else {
+                    if (isOwnBoard) {
+                    $box.classList.add("box-ship");
+                    } else {
+                        $box.classList.add("box-empty");
+                    }  
+                }
+                boxIndex++;
+            }
+        }
+    }
+
     function rowCoordinate(index) {
         const rowCoordinate = document.createElement("p");
         rowCoordinate.classList.add("coordinate");
@@ -51,5 +83,5 @@ export default function Grid(size) {
         return columnCoordinate;
     }
 
-    return { render, getContainer }
+    return { getContainer, updateGrid }
 }

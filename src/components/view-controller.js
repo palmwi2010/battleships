@@ -59,6 +59,8 @@ class ViewController {
     }
 
     #updateBoard($board, isOwnBoard = true) {
+        this.main.updateBoard();
+        /*
         const player = isOwnBoard ? this.game.getActivePlayer():this.game.getOpponentPlayer();
         const $boxes = $board.querySelectorAll(".box");
         let boxIndex = 0;
@@ -85,7 +87,7 @@ class ViewController {
                 }
                 boxIndex++;
             }
-        }
+        }*/
     }
 
     addListeners() {
