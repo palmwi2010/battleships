@@ -84,6 +84,13 @@ class Game {
         SHOT_SENT: 1,
         GAME_OVER: 2
     };
+
+    static resultMap = {
+        GAME_ENDED: 0,
+        P1_WINS: 1,
+        P2_WINS: 2,
+        COMPUTER_WINS: 3
+    }
 }
 
 export default Game;

@@ -31,6 +31,10 @@ export default function Gallery() {
         return gallery;
     }
 
+    function updateGallery() {
+        console.log("updating gallery")
+    }
+
     function renderShip(holes, orientation) {
         const container = document.createElement("div");
         container.className = "ship";
@@ -49,5 +53,5 @@ export default function Gallery() {
         return container;
     }
 
-    return { render, getContainer }
+    return { render, getContainer, updateGallery }
 }

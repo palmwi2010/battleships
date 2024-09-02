@@ -1,10 +1,11 @@
 import ControlsDisplay from "./controls-display";
 import Game from "./game";
-import Events from "./ship-deployment";
+import Events from "./events";
 import Banner from "./banner";
 import GameControls from "./game-controls";
 import Welcome from "./welcome";
 import Main from "./main";
+import PopupDialog from "./popup-dialog";
 import bodyBackground from "../assets/battle-background.webp";
 
 class ViewController {
@@ -28,13 +29,21 @@ class ViewController {
 
     renderGame() {
         //TODO - Set for if vs human and control for re deployment
-        this.game = new Game();
-        this.body.appendChild(this.banner.render())
-        this.body.appendChild(this.main.render())
-        this.body.appendChild(this.gameControls.render())
+        if (!this.game) {
+            this.game = new Game();
+            this.body.appendChild(this.banner.render())
+            this.body.appendChild(this.main.render())
+            this.body.appendChild(this.gameControls.render())
+        } else {
+            this.game = new Game();
+            this.main.refreshBoard();
+            this.main.render();
+            this.gameControls.resetButton();
+        }
     }
 
     initDeployment() {
+        this.deploymentPhase = true;
         this.renderGame();
     }
 
@@ -42,6 +51,7 @@ class ViewController {
         //this.events = new Events(this.game, this.refreshBoard.bind(this));
         this.changeDeploymentPhase();
         this.main.refreshBoard();
+        this.main.activateAttackListeners();
         //this.addListeners();
     }
 
@@ -57,16 +67,11 @@ class ViewController {
             const $ship = $ships[i];
             $ship.addEventListener("mousedown", this.events.openShipDeploy);
         }
-
-        // Squares
-        const opponentBoard = document.querySelector("#opponent-grid");
-        const squares = opponentBoard.querySelectorAll(".box");
-        squares.forEach(square => square.addEventListener("click", e => this.sendAttack(e)));
     }
 
     showGameOver(gameResult) {
-        const controlsDisplay = new ControlsDisplay(this);
-        const dialog = controlsDisplay.renderGameOver(gameResult);
+        const popupController = PopupDialog(this);
+        const dialog = popupController.renderGameOver(gameResult);
         dialog.showModal();
     }
 

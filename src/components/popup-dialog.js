@@ -1,3 +1,5 @@
+import Game from "./game";
+
 export default function PopupDialog(controller) {
 
     function renderLaunchScreen() {
@@ -13,6 +15,50 @@ export default function PopupDialog(controller) {
         buttonContainer.appendChild(buttonItems);
 
         return buttonContainer;
+    }
+
+    function renderGameOver(gameResult = 0) {
+        const $body = document.querySelector("body");
+        const $dialog = document.createElement("dialog");
+        $dialog.className = "game-dialog";
+    
+        const $header = document.createElement("h3");
+        $header.className = "dialog-header";
+        $header.textContent = generateHeader(gameResult);
+    
+        const $subheader = document.createElement("h5");
+        $subheader.className = "dialog-subheader";
+        $subheader.textContent = "Play again?";
+
+        const $buttonItems = renderButtons();
+
+        $buttonItems.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', () => $dialog.remove());
+        })
+
+        $dialog.appendChild($header);
+        $dialog.appendChild($subheader);
+        $dialog.appendChild($buttonItems);
+
+        $body.appendChild($dialog);
+
+        return $dialog;
+    }
+
+    function generateHeader(gameResult) {
+
+        const {resultMap} = Game;
+
+        switch (gameResult) {
+            case resultMap.GAME_ENDED:
+                return "Game ended!";
+            case resultMap.P1_WINS:
+                return "Player 1 wins!";
+            case resultMap.P2_WINS:
+                return "Player 2 wins!";
+            case resultMap.COMPUTER_WINS:
+                return "Computer wins!"
+        }
     }
 
     function renderButtons() {
@@ -43,5 +89,5 @@ export default function PopupDialog(controller) {
         controller.initDeployment();
     }
 
-    return { renderLaunchScreen }
+    return { renderLaunchScreen, renderGameOver }
 }

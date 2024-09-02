@@ -1,14 +1,16 @@
 import Game from "./game";
+import Events from "./events";
 
 export default function Grid(controller) {
 
     const container = document.createElement("div");
+    container.className = "grid-container";
+
     const size = Game.boardSize;
     const $boxes = [];
     render();
 
     function render() {
-        container.className = "grid-container";
 
         const rowColCoordinates = document.createElement("div");
         rowColCoordinates.className = "grid-row";
@@ -23,13 +25,20 @@ export default function Grid(controller) {
             for (let j = 0; j < size; j++) {
                 const box = document.createElement("div");
                 box.className = "box";
+
+                // X and Y co-ordinate tracking
                 box.setAttribute("data-x", i);
                 box.setAttribute("data-y", j);
+
                 const innerBox = document.createElement("div");
                 innerBox.className = "inner-box";
+
                 box.appendChild(innerBox);
                 row.appendChild(box);
-                $boxes.push(box); //NEW
+
+
+                    
+                $boxes.push(box);
             }
             container.appendChild(row);
         }
@@ -64,6 +73,13 @@ export default function Grid(controller) {
         }
     }
 
+    function activateListeners() {
+        const events = Events(controller);
+        $boxes.forEach(box => {
+            box.addEventListener("click", events.sendAttack);
+        });
+    }
+
     function rowCoordinate(index) {
         const rowCoordinate = document.createElement("p");
         rowCoordinate.classList.add("coordinate");
@@ -79,5 +95,5 @@ export default function Grid(controller) {
         return columnCoordinate;
     }
 
-    return { getContainer, updateGrid }
+    return { getContainer, updateGrid, activateListeners }
 }

@@ -28,7 +28,6 @@ export default function GameControls(controller) {
         } else {
             throw Error("Restart button shouldn't need to be activated.");
         }
-        
     }
 
     function startGame() {
@@ -39,6 +38,13 @@ export default function GameControls(controller) {
     function restartGame() {
         // TODO Call controller to restart the game
         toggleButton();
+    }
+
+    function resetButton() {
+        startButton.removeEventListener('click', restartGame);
+        startButton.textContent = startTxt;
+        startButton.className = "start-btn";
+        activateButton();
     }
 
     function toggleButton() {
@@ -54,5 +60,5 @@ export default function GameControls(controller) {
         }
     }
 
-    return {render, toggleButton, activateButton};
+    return {render, toggleButton, activateButton, resetButton};
 }

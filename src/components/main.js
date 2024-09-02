@@ -51,9 +51,14 @@ export default function Main(controller) {
     }
 
     function refreshBoard() {
+        if (controller.deploymentPhase) gallery.updateGallery();
         playerGrid.updateGrid(controller.game.getActivePlayer(), true);
         opponentGrid.updateGrid(controller.game.getOpponentPlayer(), false);
     }
 
-    return { render, refreshBoard }
+    function activateAttackListeners() {
+        opponentGrid.activateListeners();
+    }
+
+    return { render, refreshBoard, activateAttackListeners }
 }
