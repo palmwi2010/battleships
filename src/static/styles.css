@@ -21,8 +21,13 @@ body {
 }
 
 :root {
-    --box-size: 40px;
+    --box-size: 54px;
     --grid-color: #64748b;
+    --fisher-width: 30px;
+    --galley-width: 38px;
+    --frigate-width: 45px;
+    --destroyer-width: 55px;
+    --ship-height-margin: 20px;
 }
 
 /* Start screen */
@@ -135,7 +140,6 @@ body {
 
 /* Grid styling */
 .grid-container {
-    flex: 1;
 }
 
 .grid-container, .grid-container * {
@@ -160,6 +164,8 @@ body {
     background-color: var(--grid-color);
     transition-duration: 0.3s;
     position: relative;
+    width: var(--box-size);
+    height: var(--box-size);
 }
 
 .box.box-free {
@@ -172,19 +178,11 @@ body {
 }
 
 .box-hit > .inner-box {
-    /* background-color: red; */
     background-image: url("../assets/explosion.png");
     background-size: contain;
-    width: calc(var(--box-size)/1.5);
-    height: calc(var(--box-size)/1.5);
+    width: calc(var(--box-size)/1.3);
+    height: calc(var(--box-size)/1.3);
     z-index: 50;
-}
-
-.box-ship > .inner-box {
-    background-color: #0284c7;
-    width: calc(var(--box-size)/1.5);
-    height: calc(var(--box-size)/1.5);
-    box-shadow: 2px 2px 6px 0 black;
 }
 
 #opponent-grid .box {
@@ -193,14 +191,15 @@ body {
 
 .placed-ship {
     position: absolute;
-    top: 2px;
-    left: 2px;
+    /* transform: translate(25%, 0); */
+    left: 0;
+    top: 0;
     z-index: 10;
     pointer-events: none;
 }
 
-.boat-gallery.placed-ship:hover {
-    cursor: alias;
+.placed-ship.fisher-gallery {
+    left:20px;
 }
 
 .placed-ship.horizontal {
@@ -208,8 +207,8 @@ body {
 }
 
 .inner-box {
-    width: calc(var(--box-size)/3);
-    height: calc(var(--box-size)/3);
+    width: calc(var(--box-size)/2.5);
+    height: calc(var(--box-size)/2.5);
     background-color: #1e293b;
     border-radius: 50%;
 }
@@ -218,6 +217,7 @@ body {
     color: white;
     text-align: center;
     vertical-align: center;
+    width: var(--box-size);
     line-height: var(--box-size);
     font-size: 18px;
     font-weight: 700;
@@ -234,11 +234,9 @@ body {
     padding-top: 20px;
     box-sizing: border-box;
     width: 100%;
-    /* position: relative; */
 }
 
 .main-section {
-    flex:1;
 }
 
 .player-name {
@@ -272,12 +270,7 @@ body {
 
 .boat-gallery {
     -webkit-user-drag: none;
-    /* background-color: rgba(6, 181, 235, 0.5); */
-    /* border-radius: 10px; */
-    /* padding: 3px; */
-    box-sizing: content-box;
     grid-column: span 2;
-    display: grid;
     z-index: 15;
 }
 

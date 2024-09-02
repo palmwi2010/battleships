@@ -79,9 +79,10 @@ export default function Grid(controller) {
         const {ships} = player.board;
 
         ships.forEach(ship => {
-            if (!isOwnBoard && !ship.sunk) return;
+            if (!isOwnBoard && !ship.sunk) return; // Only my own boats and sunk boats
             const [x, y] = ship.coordinate;
             const $box = $boxes[coordToIndex(x, y)];
+            if ($box.lastElementChild.tagName === "IMG") return; // Img already there
             const image = shipRender.renderImage(ship.length);
             image.classList.add("placed-ship");
             if (ship.horizontal) image.classList.add("horizontal");
