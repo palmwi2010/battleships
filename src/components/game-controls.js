@@ -33,7 +33,6 @@ export default function GameControls(controller) {
         startButton.textContent = startTxt;
         startButton.classList.remove("active-btn");
         startButton.removeEventListener('click', restartGame);
-        activateButton(); //TODO Check for all ships deployed
     }
 
     function activateButton() {
@@ -45,6 +44,11 @@ export default function GameControls(controller) {
         }
     }
 
+    function deactivateButton() {
+        startButton.classList.add("active-btn");
+        startButton.removeEventListener('click', startGame);
+    }
+
     function startGame() {
         controller.initGame();
     }
@@ -53,5 +57,5 @@ export default function GameControls(controller) {
         controller.initDeployment();
     }
 
-    return { render, activateButton };
+    return { render, activateButton, deactivateButton };
 }

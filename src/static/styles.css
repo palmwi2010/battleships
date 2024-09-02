@@ -158,6 +158,7 @@ body {
     justify-content: center;
     align-items: center;
     background-color: var(--grid-color);
+    transition-duration: 0.3s;
 }
 
 .box.box-free {
@@ -208,7 +209,7 @@ body {
     padding-top: 20px;
     box-sizing: border-box;
     width: 100%;
-    position: relative;
+    /* position: relative; */
 }
 
 .main-section {
@@ -226,13 +227,13 @@ body {
 /* Gallery */
 .gallery {
     padding: 16px;
-    background-color: var(--grid-color);
+    /* background-color: var(--grid-color); */
     max-width: 550px;
     display: flex;
-    flex-direction: column;
-    gap:20px;
-    aspect-ratio: 1/1;
-    justify-content: space-around;
+    flex-direction: row;
+    gap: 40px;
+    flex-wrap: wrap;
+    /* position: relative; */
 }
 
 .top-gallery {
@@ -282,6 +283,34 @@ body {
     cursor: pointer;
 }
 
+.boat-gallery {
+    -webkit-user-drag: none;
+}
+
+.boat-gallery:hover {
+    cursor:grab;
+}
+
+.boat-gallery:active {
+    cursor: grabbing;
+}
+
+.fisher-gallery {
+    height:100px;
+}
+
+.galley-gallery {
+    height:150px;
+}
+
+.frigate-gallery {
+    height: 200px;
+}
+
+.destroyer-gallery {
+    height: 250px;
+}
+
 /* Buttons */
 .button-container {
     grid-row: 3/4;
@@ -295,9 +324,13 @@ body {
     font-size: 32px;
     border: none;
     outline: none;
-    background-color: green;
+    background-color: gray;
     color: white;
     font-weight: 700;
+}
+
+.start-btn.active-btn {
+    background-color: green;
 }
 
 .start-btn:hover {

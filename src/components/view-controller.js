@@ -53,6 +53,14 @@ class ViewController {
         //this.addListeners();
     }
 
+    setReady() {
+        this.gameControls.activateButton();
+    }
+
+    setUnready() {
+        this.gameControls.deactivateButton();
+    }
+
     changeDeploymentPhase() {
         this.deploymentPhase = false;
         this.main.render();

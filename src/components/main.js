@@ -5,7 +5,7 @@ export default function Main(controller) {
 
     const playerGrid = Grid(controller);
     const opponentGrid = Grid(controller);
-    const gallery = Gallery();
+    const gallery = Gallery(controller);
 
     const container = document.createElement("div");
     container.className = "game-container";
@@ -17,6 +17,8 @@ export default function Main(controller) {
 
         const leftSide = controller.deploymentPhase ? "Gallery":"Player";
         const rightSide = controller.deploymentPhase ? "Player":"Opponent";
+
+        refreshBoard();
 
         const $leftSide = renderSide(leftSide);
         const $rightSide = renderSide(rightSide);
@@ -36,6 +38,7 @@ export default function Main(controller) {
 
         let $main;
         if (player === "Gallery") {
+            // gallery.render();
             $main = gallery.getContainer();
         } else if (player === "Player") {
             $main = playerGrid.getContainer();
@@ -51,7 +54,7 @@ export default function Main(controller) {
     }
 
     function refreshBoard() {
-        if (controller.deploymentPhase) gallery.updateGallery();
+        if (controller.deploymentPhase) gallery.render();
         playerGrid.updateGrid(controller.game.getActivePlayer(), true);
         opponentGrid.updateGrid(controller.game.getOpponentPlayer(), false);
     }

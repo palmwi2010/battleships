@@ -12,7 +12,7 @@ class Gameboard {
         this.size = size;
         this.board = Array.from( {length: size}, () => Array.from( {length: size}, () => 0))
         this.ships = [];
-        this.myShips = Gameboard.getStartingShips();
+        this.dockedShips = Gameboard.getStartingShips();
         this.hits = [];
         this.misses = [];
         this.possibleMoves = this.#generatePossibleMoves();
@@ -56,6 +56,16 @@ class Gameboard {
             }
         }
         return true;
+    }
+
+    deployShip(holes) {
+        const index = this.dockedShips.find(ship => ship.length === holes);
+        if (!index) throw Error("No ship found in dock!");
+        this.dockedShips.splice(index, 1);
+
+        // Return true if all now deployed
+        if (this.dockedShips.length === 0) return true;
+        return false;
     }
 
     isSpaceAvailable(x, y, length, horizontal) {
@@ -103,13 +113,8 @@ class Gameboard {
     }
 
     static getStartingShips() {
-        return [
-            {id: 0, length: 2, horizontal: false, coordinate: null},
-            {id: 1, length: 3, direction: false, coordinate: null},
-            {id: 2, length: 3, direction: false, coordinate: null},
-            {id: 3, length: 4, direction: false, coordinate: null},
-            {id: 4, length: 5, direction: false, coordinate: null},
-        ]
+        const shipLengths = [2, 3, 3, 4, 5];
+        return Array.from(shipLengths, len =>  ({length:len, deployed:false}));
     } 
 }
 
