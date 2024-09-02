@@ -37,8 +37,7 @@ class ViewController {
             this.game = new Game();
             this.main.refreshBoard();
             this.main.render();
-            console.log(this.game);
-            this.gameControls.resetButton();
+            this.gameControls.render();
         }
     }
 
@@ -57,6 +56,7 @@ class ViewController {
     changeDeploymentPhase() {
         this.deploymentPhase = false;
         this.main.render();
+        this.gameControls.render();
     }
 
     addListeners() {

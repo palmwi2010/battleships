@@ -1,25 +1,40 @@
 export default function GameControls(controller) {
-    
-    let startButton = null;
+
+    const container = document.createElement("div");
+    container.className = "button-container";
+    const startButton = document.createElement("button");
+    startButton.className = "start-btn";
+    container.appendChild(startButton);
+
     const startTxt = "Start game";
     const restartTxt = "Restart game";
 
     function render() {
-        const container = document.createElement("div");
-        container.className = "button-container";
-    
-        startButton = document.createElement("button")
-        startButton.textContent = startTxt;
-        startButton.className = "start-btn";
 
-        activateButton();
-    
-        container.appendChild(startButton);
+        if (controller.deploymentPhase) {
+            renderStartButton();
+        } else {
+            renderRestartButton();
+        }
         return container;
     }
 
     function isStartButton() {
         return startButton.textContent === startTxt;
+    }
+
+    function renderRestartButton() {
+        startButton.textContent = restartTxt;
+        startButton.classList.add("active-btn");
+        startButton.removeEventListener('click', startGame);
+        startButton.addEventListener('click', restartGame);
+    }
+
+    function renderStartButton() {
+        startButton.textContent = startTxt;
+        startButton.classList.remove("active-btn");
+        startButton.removeEventListener('click', restartGame);
+        activateButton(); //TODO Check for all ships deployed
     }
 
     function activateButton() {
@@ -33,34 +48,11 @@ export default function GameControls(controller) {
 
     function startGame() {
         controller.initGame();
-        toggleButton();
     }
 
     function restartGame() {
-        // TODO Call controller to restart the game
         controller.initDeployment();
-        toggleButton();
     }
 
-    function resetButton() {
-        startButton.removeEventListener('click', restartGame);
-        startButton.textContent = startTxt;
-        startButton.className = "start-btn";
-        activateButton();
-    }
-
-    function toggleButton() {
-        if (isStartButton()) {
-            startButton.removeEventListener('click', startGame);
-            startButton.addEventListener('click', restartGame);
-            startButton.textContent = restartTxt;
-        } else {
-            startButton.removeEventListener('click', restartGame);
-            startButton.textContent = startTxt;
-            startButton.className = "start-btn";
-            activateButton();
-        }
-    }
-
-    return {render, toggleButton, activateButton, resetButton};
+    return { render, activateButton };
 }
