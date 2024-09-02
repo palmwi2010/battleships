@@ -226,65 +226,36 @@ body {
 
 /* Gallery */
 .gallery {
-    padding: 16px;
-    /* background-color: var(--grid-color); */
-    max-width: 550px;
-    display: flex;
-    flex-direction: row;
-    gap: 40px;
-    flex-wrap: wrap;
-    /* position: relative; */
-}
-
-.top-gallery {
-    display: flex;
-    flex-direction: column;
-    gap:20px;
-}
-
-.bottom-gallery {
-    display: flex;
-    flex-direction: row;
-    gap:20px;
-}
-
-.ship, .ship-empty {
-    display: flex;
-    width: fit-content;
-    gap: 20px;
-    border-radius: 20%;
-}
-
-.ship.horizontal {
-    flex-direction: row;
-    padding: 10px 20px;
-}
-
-.ship.vertical {
-    flex-direction: column;
-    padding: 20px 10px;
-    height: fit-content;
-}
-
-.ship {
-    background-color: #0284c7;
-}
-
-.ship.ship-empty {
-    background-color: transparent;
-    border: 2px dashed black;
-}
-
-.ship.ship-empty:hover {
-    cursor: pointer;
-}
-
-.ship:hover {
-    cursor: pointer;
+    padding: 10px;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: repeat(6, 1fr);
+    align-items: center;
+    width: 600px;
+    height:550px;
+    border: 2px solid white;
+    border-radius: 20px;
 }
 
 .boat-gallery {
     -webkit-user-drag: none;
+    background-color: rgba(6, 181, 235, 0.5);
+    border-radius: 10px;
+    padding: 3px;
+    box-sizing: content-box;
+    grid-column: span 2;
+    display: grid;
+
+}
+
+.ship-container {
+    grid-column: span 2;
+    align-self: center;
+    justify-self: center;
+}
+
+.ship-container:nth-child(4) {
+    grid-column: span 3;
 }
 
 .boat-gallery:hover {
@@ -307,8 +278,16 @@ body {
     height: 200px;
 }
 
+.boat-gallery.frigate-gallery {
+    grid-column: span 3;
+}
+
 .destroyer-gallery {
     height: 250px;
+}
+
+.horizontal {
+    transform: rotate(90deg);
 }
 
 /* Buttons */
@@ -333,6 +312,6 @@ body {
     background-color: green;
 }
 
-.start-btn:hover {
+.active-btn:hover {
     cursor: pointer;
 }

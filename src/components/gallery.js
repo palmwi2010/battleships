@@ -19,7 +19,7 @@ export default function Gallery(controller) {
     }
 
     let isDragging = false;
-    let image, imageWidth;
+    let image, imageWidth, imageHeight, isHorizontal;
 
     function render() {
 
@@ -37,6 +37,8 @@ export default function Gallery(controller) {
     }
 
     function renderNewShip(obj) {
+        const div = document.createElement("div");
+        div.className = "ship-container";
         const img = document.createElement("img");
         img.src = obj.img;
         img.alt = `Image of a ship with ${obj.holes} holes.`
@@ -44,7 +46,9 @@ export default function Gallery(controller) {
         img.className = "boat-gallery";
         img.classList.add(obj.class);
         img.addEventListener("mousedown", dragBoat);
-        return img;
+        img.addEventListener("mouseup", toggleHorizontal);
+        div.appendChild(img);
+        return div;
     }
 
     function getContainer() {
@@ -55,38 +59,39 @@ export default function Gallery(controller) {
             // Set dragging and target image
             isDragging = true;
             image = e.currentTarget;
+            isHorizontal = image.classList.contains("horizontal");
+            console.log(isHorizontal)
 
             // Get image
             const styles = window.getComputedStyle(image);
             imageWidth = parseFloat(styles.getPropertyValue("width"));
-
-            // Set position to absolute at the start of dragging
-            image.style.position = "absolute";
-    
-            // Calculate the offset between the mouse click position and the image's top-left corner
-            const left = e.clientX - imageWidth/2;
-    
-            // Set the image's initial position to its current position
-            image.style.left = `${left}px`;
-            image.style.top = `${e.clientY}px`;
+            imageHeight = parseFloat(styles.getPropertyValue("height"));
     
             // Add mousemove and mouseup event listeners to the document
             document.addEventListener("mousemove", onMouseMove);
             document.addEventListener("mouseup", onMouseUp);
+    }
 
-            // Add the coloring of squares
-            openShipDeploy(e);
+    function toggleHorizontal(e) {
+        e.currentTarget.classList.toggle("horizontal");
     }
 
     function onMouseMove(e) {
         if (!isDragging) return;
 
         // Calculate the new position of the image
-        const left = e.clientX - imageWidth/2;
+        const left = e.clientX - ((isHorizontal) ? -(imageHeight/3):(imageWidth/2));
+        const top = e.clientY - ((isHorizontal) ? (imageHeight/2):0);
+        console.log(top);
 
         // Update the image's position
+        image.style.position = "absolute";
         image.style.left = `${left}px`;
-        image.style.top = `${e.clientY}px`;
+        image.style.top = `${top}px`;
+
+        // Add the coloring of squares
+        image.removeEventListener("mouseup", toggleHorizontal);
+        openShipDeploy();
     }
 
     function onMouseUp(e) {
@@ -103,7 +108,7 @@ export default function Gallery(controller) {
         if (box) {
             const {board} = controller.game.getActivePlayer();
             const length = Number(image.dataset.ship);
-            board.insertShip(Number(box.dataset.x), Number(box.dataset.y), length, false);
+            board.insertShip(Number(box.dataset.x), Number(box.dataset.y), length, isHorizontal);
             if (board.deployShip(length)) {
                 controller.setReady();
             }
@@ -115,6 +120,7 @@ export default function Gallery(controller) {
         // Remove the event listeners when the mouse is released
         document.removeEventListener("mousemove", onMouseMove);
         document.removeEventListener("mouseup", onMouseUp);
+        image.addEventListener("mouseup", toggleHorizontal)
 
         // Remove all temporary styling and listeners
         document.querySelectorAll(".box-free").forEach(element => {
@@ -122,9 +128,9 @@ export default function Gallery(controller) {
         });
     }
 
-    function openShipDeploy(e) {
+    function openShipDeploy() {
         // Main logic
-        const {ship} = e.currentTarget.dataset;
+        const {ship} = image.dataset;
         const {board} = controller.game.getActivePlayer();
         const $boxes = document.querySelectorAll(".box");
         const {possibleMoves} = board;
@@ -132,7 +138,7 @@ export default function Gallery(controller) {
         for (let i = 0; i < possibleMoves.length; i++) {
             const move = possibleMoves[i];
             const $box = $boxes[i]
-            if (board.isSpaceAvailable(move[0], move[1], ship, false)) {
+            if (board.isSpaceAvailable(move[0], move[1], ship, isHorizontal)) {
                 $box.classList.add("box-free");
             }
         }

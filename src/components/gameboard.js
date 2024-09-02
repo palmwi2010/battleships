@@ -59,13 +59,28 @@ class Gameboard {
     }
 
     deployShip(holes) {
-        const index = this.dockedShips.find(ship => ship.length === holes);
-        if (!index) throw Error("No ship found in dock!");
+        const index = this.dockedShips.findIndex(ship => ship.length === holes);
+        if (index === -1) throw Error("No ship found in dock!");
         this.dockedShips.splice(index, 1);
 
         // Return true if all now deployed
         if (this.dockedShips.length === 0) return true;
         return false;
+    }
+
+    setRandomDeployment() {
+
+        while (this.dockedShips.length > 0) {
+            const [ship] = this.dockedShips;
+            const horizontal = Math.round(Math.random()) === 1;
+            const x = Math.floor(Math.random() * this.size);
+            const y = Math.floor(Math.random() * this.size);
+            const {length} = ship;
+            if (this.insertShip(x, y, length, horizontal)) {
+                this.deployShip(length);
+            }
+        }
+
     }
 
     isSpaceAvailable(x, y, length, horizontal) {

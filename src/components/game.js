@@ -13,17 +13,11 @@ class Game {
     static boardSize = 10;
 
     initPlayer1() {
-        this.player1.board.insertShip(0,0,2,true);
-        this.player1.board.insertShip(2,1,3,true);
-        this.player1.board.insertShip(4,7,3,false);
-        this.player1.board.insertShip(9,0,4,true);
+        //this.player1.board.setRandomDeployment();
     }
 
     initPlayer2() {
-        this.player2.board.insertShip(0,0,2,true);
-        this.player2.board.insertShip(2,1,3,true);
-        this.player2.board.insertShip(4,7,3,false);
-        this.player2.board.insertShip(9,0,4,true);
+        this.player2.board.setRandomDeployment();
     }
 
     init() {

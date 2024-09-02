@@ -114,3 +114,9 @@ test("updating of possible moves", () => {
     expect(board.possibleMoves[0][1]).toBe(1);
 })
 
+test("random deployment", () => {
+    const board = new Gameboard(10);
+    board.setRandomDeployment();
+    expect(board.dockedShips.length).toBe(0);
+    expect(board.ships.length).toBe(5);
+})
