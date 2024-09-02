@@ -159,6 +159,7 @@ body {
     align-items: center;
     background-color: var(--grid-color);
     transition-duration: 0.3s;
+    position: relative;
 }
 
 .box.box-free {
@@ -171,8 +172,12 @@ body {
 }
 
 .box-hit > .inner-box {
-    background-color: red;
-    box-shadow: 2px 2px 6px 0 black;
+    /* background-color: red; */
+    background-image: url("../assets/explosion.png");
+    background-size: contain;
+    width: calc(var(--box-size)/1.5);
+    height: calc(var(--box-size)/1.5);
+    z-index: 50;
 }
 
 .box-ship > .inner-box {
@@ -184,6 +189,22 @@ body {
 
 #opponent-grid .box {
     cursor: url("../assets/target.png") 25 15, auto;
+}
+
+.placed-ship {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.boat-gallery.placed-ship:hover {
+    cursor: alias;
+}
+
+.placed-ship.horizontal {
+    transform: rotate(90deg) translate(-145%, -35%);
 }
 
 .inner-box {
@@ -237,19 +258,27 @@ body {
     align-items: center;
     width: 600px;
     height:550px;
-    border: 2px solid white;
+    /* border: 2px solid white; */
     border-radius: 20px;
-}
+    background: radial-gradient(
+        circle,
+        rgba(0, 51, 102, 0.9) 0%,   /* Darker deep blue at the center */
+        rgba(0, 76, 102, 0.8) 40%,  /* Darker blue towards the middle */
+        rgba(0, 102, 102, 0.7) 60%, /* Darker turquoise further out */
+        rgba(0, 128, 128, 0.65) 90%, /* Darker cyan further out */
+        rgba(0, 153, 153, 0.6) 100% /* Darker light cyan at the edges */
+      );
+    }
 
 .boat-gallery {
     -webkit-user-drag: none;
-    background-color: rgba(6, 181, 235, 0.5);
-    border-radius: 10px;
-    padding: 3px;
+    /* background-color: rgba(6, 181, 235, 0.5); */
+    /* border-radius: 10px; */
+    /* padding: 3px; */
     box-sizing: content-box;
     grid-column: span 2;
     display: grid;
-
+    z-index: 15;
 }
 
 .ship-container {

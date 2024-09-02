@@ -103,7 +103,7 @@ class Gameboard {
     }
 
     #updateBoardWithShip(x, y, length, horizontal) {
-        const ship = new Ship(length);
+        const ship = new Ship(length, [x, y], horizontal);
         for (let index = 0; index < length; index++) {
             const x_ = x + (horizontal ? 0:index);
             const y_ = y + (horizontal ? index:0);

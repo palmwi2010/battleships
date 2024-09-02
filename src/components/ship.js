@@ -1,11 +1,13 @@
 class Ship {
 
-    constructor(length) {
+    constructor(length, coordinate = null, horizontal = true) {
         if (!length) throw Error("Ship requires a length to be initialized.")
 
         this.length = length;
         this.numHits = 0;
         this.sunk = false;
+        this.coordinate = coordinate;
+        this.horizontal = horizontal;
     }
 
     sink() {

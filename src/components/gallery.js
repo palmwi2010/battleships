@@ -1,22 +1,10 @@
-import Player from "./player";
-import destroyerImg from "../assets/destroyer.webp";
-import frigateImg from "../assets/frigate.webp";
-import galleyA from "../assets/galley-a.webp";
-import galleyB from "../assets/galley-b.webp";
-import fisherImg from "../assets/fisher.webp";
+import ShipRender from "./ship-render";
 
 export default function Gallery(controller) {
 
     const gallery = document.createElement("div");
     gallery.className = "gallery";
-
-    // Mapping of image based on number of holes in ship
-    const shipMap = {
-        2: {img:fisherImg, class: "fisher-gallery", holes: 2},
-        3: {img:galleyA, class: "galley-gallery", holes:3},
-        4: {img:frigateImg, class: "frigate-gallery", holes: 4},
-        5: {img:destroyerImg, class: "destroyer-gallery", holes:5},
-    }
+    const shipRender = ShipRender();
 
     let isDragging = false;
     let image, imageWidth, imageHeight, isHorizontal;
@@ -31,20 +19,15 @@ export default function Gallery(controller) {
         const ships = player.board.dockedShips;
 
         ships.forEach(ship => {
-            const shipView = shipMap[ship.length];
-            gallery.appendChild(renderNewShip(shipView));
+            gallery.appendChild(renderNewShip(ship.length));
         })
     }
 
-    function renderNewShip(obj) {
+    function renderNewShip(holes) {
         const div = document.createElement("div");
         div.className = "ship-container";
-        const img = document.createElement("img");
-        img.src = obj.img;
-        img.alt = `Image of a ship with ${obj.holes} holes.`
-        img.setAttribute("data-ship", obj.holes);
-        img.className = "boat-gallery";
-        img.classList.add(obj.class);
+        const img = shipRender.renderImage(holes);
+
         img.addEventListener("mousedown", dragBoat);
         img.addEventListener("mouseup", toggleHorizontal);
         div.appendChild(img);
