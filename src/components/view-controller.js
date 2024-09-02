@@ -38,6 +38,7 @@ class ViewController {
             this.game = new Game();
             this.main.refreshBoard();
             this.main.render();
+            console.log(this.game);
             this.gameControls.resetButton();
         }
     }

@@ -2,7 +2,6 @@ import Game from "./game";
 
 export default function Events(controller)  {
 
-    const {game} = controller;
     let selectedShip = null;
 
     function openShipDeploy(e) {
@@ -11,7 +10,7 @@ export default function Events(controller)  {
 
         // Main logic
         const {ship} = e.currentTarget.dataset;
-        const {board} = game.getActivePlayer();
+        const {board} = controller.game.getActivePlayer();
         const $boxes = document.querySelectorAll(".box");
         const {possibleMoves} = board;
 
@@ -41,7 +40,7 @@ export default function Events(controller)  {
         if (clickedElement.classList.contains("box")) {
             const {x} = clickedElement.dataset;
             const {y} = clickedElement.dataset;
-            if (game.getActivePlayer().board.insertShip(Number(x), Number(y), selectedShip)) {
+            if (controller.game.getActivePlayer().board.insertShip(Number(x), Number(y), selectedShip)) {
                 controller.main.refreshBoard();
             };
         }
@@ -58,21 +57,21 @@ export default function Events(controller)  {
     // Send attack when clicking on a square
     function sendAttack(e) {
         if (controller.deploymentPhase) return;
-        
+
         const box = e.currentTarget;
         const {x} = box.dataset;
         const {y} = box.dataset;
-        console.log(game);
-        const result = game.shotFired(Number(x),Number(y));
+        //console.log(controller.game);
+        const result = controller.game.shotFired(Number(x),Number(y));
 
         if (result === Game.ShotResult.SHOT_SENT) {
             controller.main.refreshBoard();
         } else if (result === Game.ShotResult.GAME_OVER) {
             // Handle end game display
-            if (game.turn === 1) {
+            if (controller.game.turn === 1) {
                 controller.showGameOver(Game.resultMap.P1_WINS)
             } else {
-                if (game.player2.isComputer) {
+                if (controller.game.player2.isComputer) {
                     controller.showGameOver(Game.resultMap.COMPUTER_WINS);
                 } else {
                     controller.showGameOver(Game.resultMap.P2_WINS);

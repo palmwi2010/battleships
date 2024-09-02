@@ -36,8 +36,6 @@ export default function Grid(controller) {
                 box.appendChild(innerBox);
                 row.appendChild(box);
 
-
-                    
                 $boxes.push(box);
             }
             container.appendChild(row);
