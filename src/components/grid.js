@@ -90,7 +90,12 @@ export default function Grid(controller) {
         })
     };
 
-
+    function clearShips() {
+        $boxes.forEach(box => {
+            const lastChild = box.lastElementChild;
+            if (lastChild.tagName === "IMG") lastChild.remove();
+        })
+    }
 
     function coordToIndex(x, y) {
         return size * x + y;
@@ -118,5 +123,5 @@ export default function Grid(controller) {
         return columnCoordinate;
     }
 
-    return { getContainer, updateGrid, activateListeners }
+    return { getContainer, updateGrid, activateListeners, clearShips }
 }

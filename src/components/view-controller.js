@@ -35,6 +35,7 @@ class ViewController {
             this.body.appendChild(this.gameControls.render())
         } else {
             this.game = new Game();
+            this.main.clearShips();
             this.main.refreshBoard();
             this.main.render();
             this.gameControls.render();

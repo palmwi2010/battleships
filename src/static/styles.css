@@ -27,7 +27,7 @@ body {
     --galley-width: 38px;
     --frigate-width: 45px;
     --destroyer-width: 55px;
-    --ship-height-margin: 20px;
+    --ship-height-margin: 0px;
 }
 
 /* Start screen */
@@ -180,8 +180,8 @@ body {
 .box-hit > .inner-box {
     background-image: url("../assets/explosion.png");
     background-size: contain;
-    width: calc(var(--box-size)/1.3);
-    height: calc(var(--box-size)/1.3);
+    width: calc(var(--box-size)/1.5);
+    height: calc(var(--box-size)/1.5);
     z-index: 50;
 }
 
@@ -192,18 +192,18 @@ body {
 .placed-ship {
     position: absolute;
     /* transform: translate(25%, 0); */
-    left: 0;
+    left: 50%;
     top: 0;
+    transform: translate(-50%, 0);
     z-index: 10;
     pointer-events: none;
 }
 
-.placed-ship.fisher-gallery {
-    left:20px;
-}
-
 .placed-ship.horizontal {
-    transform: rotate(90deg) translate(-145%, -35%);
+    left:0;
+    top:50%;
+    transform: rotate(90deg) translate(-50%,-100%);
+    transform-origin: top left;
 }
 
 .inner-box {
@@ -236,9 +236,6 @@ body {
     width: 100%;
 }
 
-.main-section {
-}
-
 .player-name {
     /* margin-left: var(--box-size); */
     color: white;
@@ -256,7 +253,6 @@ body {
     align-items: center;
     width: 600px;
     height:550px;
-    /* border: 2px solid white; */
     border-radius: 20px;
     background: radial-gradient(
         circle,
@@ -293,15 +289,17 @@ body {
 }
 
 .fisher-gallery {
-    height:100px;
+    height:calc(var(--box-size) * 2 - var(--ship-height-margin));
+    width: var(--fisher-width);
 }
 
 .galley-gallery {
-    height:150px;
-}
+    height:calc(var(--box-size) * 3 - var(--ship-height-margin));
+    width: var(--galley-width);}
 
 .frigate-gallery {
-    height: 200px;
+    height:calc(var(--box-size) * 4 - var(--ship-height-margin));
+    width: var(--frigate-width);
 }
 
 .boat-gallery.frigate-gallery {
@@ -309,7 +307,8 @@ body {
 }
 
 .destroyer-gallery {
-    height: 250px;
+    height:calc(var(--box-size) * 5 - var(--ship-height-margin));
+    width: var(--destroyer-width);
 }
 
 .horizontal {

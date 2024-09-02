@@ -63,5 +63,10 @@ export default function Main(controller) {
         opponentGrid.activateListeners();
     }
 
-    return { render, refreshBoard, activateAttackListeners }
+    function clearShips() {
+        playerGrid.clearShips();
+        opponentGrid.clearShips();
+    }
+
+    return { render, refreshBoard, activateAttackListeners, clearShips }
 }
