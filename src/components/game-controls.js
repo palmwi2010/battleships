@@ -1,4 +1,5 @@
 export default function GameControls(controller) {
+    
     let startButton = null;
     const startTxt = "Start game";
     const restartTxt = "Restart game";
@@ -37,6 +38,7 @@ export default function GameControls(controller) {
 
     function restartGame() {
         // TODO Call controller to restart the game
+        controller.initDeployment();
         toggleButton();
     }
 

@@ -1,4 +1,3 @@
-import ControlsDisplay from "./controls-display";
 import Game from "./game";
 import Events from "./events";
 import Banner from "./banner";
@@ -49,7 +48,6 @@ class ViewController {
     }
 
     initGame() {
-        //this.events = new Events(this.game, this.refreshBoard.bind(this));
         this.changeDeploymentPhase();
         this.main.refreshBoard();
         this.main.activateAttackListeners();
@@ -74,28 +72,6 @@ class ViewController {
         const popupController = PopupDialog(this);
         const dialog = popupController.renderGameOver(gameResult);
         dialog.showModal();
-    }
-
-    sendAttack(e) {
-        const box = e.currentTarget;
-        const {x} = box.dataset;
-        const {y} = box.dataset;
-        const result = this.game.shotFired(Number(x),Number(y));
-
-        if (result === Game.ShotResult.SHOT_SENT) {
-            this.main.refreshBoard();
-        } else if (result === Game.ShotResult.GAME_OVER) {
-            // Handle end game display
-            if (this.game.turn === 1) {
-                this.showGameOver(ControlsDisplay.gameResult.P1_WINS)
-            } else {
-                if (this.game.player2.isComputer) {
-                    this.showGameOver(ControlsDisplay.gameResult.COMPUTER_WINS);
-                } else {
-                    this.showGameOver(ControlsDisplay.gameResult.P2_WINS);
-                }
-            }
-        }
     }
 }
 
