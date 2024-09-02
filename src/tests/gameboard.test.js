@@ -113,3 +113,10 @@ test("updating of possible moves", () => {
     expect(board.possibleMoves[0][0]).toBe(0);
     expect(board.possibleMoves[0][1]).toBe(1);
 })
+
+test("mutation of ships doesn't affect another", () => {
+    const board = new Gameboard(7);
+    board.myShips[0].coordinate = [5,2];
+    const newBoard = new Gameboard(7);
+    expect(newBoard.myShips[0].coordinate).toBe(null);
+})

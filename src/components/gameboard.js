@@ -12,6 +12,7 @@ class Gameboard {
         this.size = size;
         this.board = Array.from( {length: size}, () => Array.from( {length: size}, () => 0))
         this.ships = [];
+        this.myShips = Gameboard.getStartingShips();
         this.hits = [];
         this.misses = [];
         this.possibleMoves = this.#generatePossibleMoves();
@@ -100,6 +101,16 @@ class Gameboard {
         const index = this.possibleMoves.findIndex(coord => coord[0] === x && coord[1] === y);
         this.possibleMoves.splice(index, 1);
     }
+
+    static getStartingShips() {
+        return [
+            {id: 0, length: 2, horizontal: false, coordinate: null},
+            {id: 1, length: 3, direction: false, coordinate: null},
+            {id: 2, length: 3, direction: false, coordinate: null},
+            {id: 3, length: 4, direction: false, coordinate: null},
+            {id: 4, length: 5, direction: false, coordinate: null},
+        ]
+    } 
 }
 
 export default Gameboard;

@@ -10,7 +10,6 @@ export default function GameControls(controller) {
     const restartTxt = "Restart game";
 
     function render() {
-
         if (controller.deploymentPhase) {
             renderStartButton();
         } else {
