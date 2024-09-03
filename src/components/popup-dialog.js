@@ -77,7 +77,7 @@ export default function PopupDialog(controller) {
         vsHumanButton.addEventListener("click", startVsHuman);
     
         buttonItems.appendChild(vsComputerButton);
-        buttonItems.appendChild(vsHumanButton);
+        //buttonItems.appendChild(vsHumanButton);
         return buttonItems;
     }
 
