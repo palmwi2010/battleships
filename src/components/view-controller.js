@@ -68,15 +68,6 @@ class ViewController {
         this.gameControls.render();
     }
 
-    addListeners() {
-        // Ships
-        const $ships = document.querySelectorAll(".ship");
-        for (let i = 0; i < $ships.length; i++) {
-            const $ship = $ships[i];
-            $ship.addEventListener("mousedown", this.events.openShipDeploy);
-        }
-    }
-
     showGameOver(gameResult) {
         const popupController = PopupDialog(this);
         const dialog = popupController.renderGameOver(gameResult);

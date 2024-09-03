@@ -23,6 +23,7 @@ body {
 :root {
     --box-size: 54px;
     --grid-color: #64748b;
+    --grid-highlight: #455f85;
     --fisher-width: 30px;
     --galley-width: 38px;
     --frigate-width: 45px;
@@ -140,6 +141,7 @@ body {
 
 /* Grid styling */
 .grid-container {
+    user-select: none;
 }
 
 .grid-container, .grid-container * {
@@ -170,6 +172,20 @@ body {
 
 .box.box-free {
     background-color: rgba(34, 197, 94, 0.8);
+}
+
+#opponent-grid .box:hover {
+    background-color: var(--grid-highlight);
+}
+
+#opponent-grid .box.box-miss:hover {
+    background-color: var(--grid-color);
+}
+
+#opponent-grid .box.box-miss:hover, 
+#opponent-grid .box.box-hit:hover, 
+#opponent-grid .box.box-ship:hover {
+    background-color: var(--grid-color);
 }
 
 .box-miss > .inner-box {
@@ -254,14 +270,15 @@ body {
     width: 600px;
     height:550px;
     border-radius: 20px;
+    /* background-image: url("../assets/gallery-background-filter.png"); */
     background: radial-gradient(
         circle,
-        rgba(0, 51, 102, 0.9) 0%,   /* Darker deep blue at the center */
-        rgba(0, 76, 102, 0.8) 40%,  /* Darker blue towards the middle */
-        rgba(0, 102, 102, 0.7) 60%, /* Darker turquoise further out */
-        rgba(0, 128, 128, 0.65) 90%, /* Darker cyan further out */
-        rgba(0, 153, 153, 0.6) 100% /* Darker light cyan at the edges */
-      );
+        rgba(0, 51, 102, 0.9) 0%,   
+        rgba(0, 76, 102, 0.8) 40%,  
+        rgba(0, 102, 102, 0.7) 60%, 
+        rgba(0, 128, 128, 0.65) 90%, 
+        rgba(0, 153, 153, 0.6) 100% 
+      )
     }
 
 .boat-gallery {

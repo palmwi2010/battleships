@@ -42,7 +42,6 @@ class Game {
             // Generate computer move
             const move = this.generateComputerMove();
             this.shotFired(move[0], move[1]);
-            if (this.turn === 2) throw Error("Computer move wasn't successful")
         }
     }
 

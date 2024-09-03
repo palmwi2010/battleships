@@ -57,6 +57,9 @@ export default function Main(controller) {
         if (controller.deploymentPhase) gallery.render();
         playerGrid.updateGrid(controller.game.getActivePlayer(), true);
         opponentGrid.updateGrid(controller.game.getOpponentPlayer(), false);
+
+        // Check game over
+        
     }
 
     function activateAttackListeners() {

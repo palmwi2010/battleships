@@ -56,6 +56,9 @@ export default function Grid(controller) {
             const square = newState[i];
             const $box = $boxes[i]; 
             $box.className = "box"; // Reset class name
+            if ($box.lastElementChild.tagName === "IMG") {
+                $box.lastElementChild.remove();
+            }
 
             switch(square) {
                 case 0:
