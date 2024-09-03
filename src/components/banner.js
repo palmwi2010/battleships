@@ -1,6 +1,3 @@
-import battleshipsHeader from "../assets/battleshipsHeader.webp";
-import trialHeader from "../assets/trial-header.png";
-
 export default function Banner() {
 
     function render() {
