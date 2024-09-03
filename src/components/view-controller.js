@@ -6,6 +6,7 @@ import Welcome from "./welcome";
 import Main from "./main";
 import PopupDialog from "./popup-dialog";
 import bodyBackground from "../assets/battle-background.webp";
+import renderFooter from "./footer";
 
 class ViewController {
 
@@ -19,6 +20,7 @@ class ViewController {
         this.body = document.querySelector('body');
         this.body.style.backgroundImage = `url(${bodyBackground})`;
         this.deploymentPhase = true;
+        renderFooter();
     }
 
     showLaunchScreen() {
@@ -39,6 +41,19 @@ class ViewController {
             this.main.refreshBoard();
             this.main.render();
             this.gameControls.render();
+        }
+    }
+
+    refresh() {
+        this.main.refreshBoard();
+        this.checkEndGame();
+    }
+
+    checkEndGame() {
+        if (this.game.player1.board.checkAllSunk()) {
+            this.showGameOver(Game.resultMap.P2_WINS);
+        } else if (this.game.player2.board.checkAllSunk()) {
+            this.showGameOver(Game.resultMap.P1_WINS);
         }
     }
 

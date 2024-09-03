@@ -43,7 +43,6 @@ export default function Gallery(controller) {
             isDragging = true;
             image = e.currentTarget;
             isHorizontal = image.classList.contains("horizontal");
-            console.log(isHorizontal)
 
             // Get image
             const styles = window.getComputedStyle(image);
@@ -65,7 +64,6 @@ export default function Gallery(controller) {
         // Calculate the new position of the image
         const left = e.clientX - ((isHorizontal) ? -(imageHeight/3):(imageWidth/2));
         const top = e.clientY - ((isHorizontal) ? (imageHeight/2):0);
-        console.log(top);
 
         // Update the image's position
         image.style.position = "absolute";

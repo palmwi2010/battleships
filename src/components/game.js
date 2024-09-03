@@ -29,20 +29,44 @@ class Game {
         const attackedPlayer = this.turn === 1 ? this.player2:this.player1;
 
         if (attackedPlayer.board.receiveAttack(x, y)) {
-            if (attackedPlayer.board.checkAllSunk()) return Game.ShotResult.GAME_OVER;
             this.changeTurn();
-            return Game.ShotResult.SHOT_SENT;
+            return true;
         }
-        return Game.ShotResult.SHOT_NOT_SENT;
+        return false;
     }
 
     changeTurn() {
         this.turn = (this.turn === 1) ? 2:1;
         if (this.turn === 2 && this.player2.isComputer) {
             // Generate computer move
-            const move = this.generateComputerMove();
-            this.shotFired(move[0], move[1]);
+            this.makeComputerMove();
         }
+    }
+
+    makeComputerMove() {
+        // Generate computer move
+        const startingHits = this.player1.board.hits.length;
+        const move = this.generateComputerMove(); // Generates a move for the computer
+        this.shotFired(move[0], move[1]); // Fires move and changes turn
+        const endingHits = this.player1.board.hits.length;
+
+        if (startingHits != endingHits) {
+            this.addToMoveStack(move);
+        }
+    }
+
+    addToMoveStack(move) {
+        const opponentBoard = this.player1.board;
+        const {possibleMoves} = opponentBoard;
+        const [x, y] = move;
+
+        possibleMoves.forEach(m => {
+            const deltaX = Math.abs(m[0] - x);
+            const deltaY = Math.abs(m[1] - y);
+            if (deltaX < 2 && deltaY < 2 && (deltaX * deltaY) === 0) {
+                this.player2.moveStack.push(m);
+            }
+        })
     }
 
     getActivePlayer() {
@@ -67,6 +91,9 @@ class Game {
         const {possibleMoves} = opponentBoard;
 
         if (possibleMoves.length === 0) return Error("No more possible moves remaining!");
+        if (this.player2.moveStack.length > 0) {
+            return this.player2.moveStack.pop();
+        }
         const randIndex = Math.floor(Math.random() * possibleMoves.length);
 
         return possibleMoves[randIndex];

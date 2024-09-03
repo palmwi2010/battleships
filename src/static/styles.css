@@ -9,19 +9,22 @@
     font-family: 'Roboto';
     src: url('../assets/fonts/Roboto-Regular.ttf');
 }
+@font-face {
+    font-family: 'Bangers';
+    src: url('../assets/fonts/Bangers-Regular.ttf');
+}
 
 body {
     height: 100vh;
     background-color: black;
     position: relative;
     display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
-    grid-template-rows: 4fr 10fr 3fr;
+    grid-template-rows: 1fr 5fr 10fr 24px;
     /* background-image: url('../assets/battle-background.webp'); */
 }
 
 :root {
-    --box-size: 54px;
+    --box-size: 50px;
     --grid-color: #64748b;
     --grid-highlight: #455f85;
     --fisher-width: 30px;
@@ -129,14 +132,25 @@ body {
     display: grid;
     align-items: center;
     justify-content: center;
-    padding: 40px 0;
-    grid-column: 1/-1;
+    padding: 20px 0;
+    grid-row: 1/2;
 }
 
 .battleships-header {
-    height: 200px;
+    /* height: 200px; */
     width: 1000px;
     border-radius: 40px;
+}
+
+.header-text {
+    font-size: 100px;
+    color: white;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.2ch;
+    text-shadow: 10px 10px black;
+    font-family: 'Bangers';
 }
 
 /* Grid styling */
@@ -243,7 +257,7 @@ body {
 
 /* Game sizing */
 .game-container {
-    grid-column: 2/3;
+    grid-row: 2/3;
     display: flex;
     gap: 100px;
     justify-content: center;
@@ -268,9 +282,8 @@ body {
     grid-template-columns: repeat(6, 1fr);
     align-items: center;
     width: 600px;
-    height:550px;
+    height: calc(10*var(--box-size));
     border-radius: 20px;
-    /* background-image: url("../assets/gallery-background-filter.png"); */
     background: radial-gradient(
         circle,
         rgba(0, 51, 102, 0.9) 0%,   
@@ -335,12 +348,12 @@ body {
 /* Buttons */
 .button-container {
     grid-row: 3/4;
-    grid-column: 2/3;
     margin: 0 auto;
+    padding: 20px;
 }
 
 .start-btn {
-    padding: 20px 48px;
+    padding: 16px 40px;
     border-radius: 20px;
     font-size: 32px;
     border: none;
@@ -356,4 +369,23 @@ body {
 
 .active-btn:hover {
     cursor: pointer;
+}
+
+/*Footer*/
+.credits {
+    grid-row: 4/5;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height:24px;
+    background-color: wheat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:10px;
+    z-index: 100;;
+}
+
+.odin-img {
+    height:20px;
 }

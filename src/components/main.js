@@ -38,7 +38,7 @@ export default function Main(controller) {
 
         let $main;
         if (player === "Gallery") {
-            // gallery.render();
+            header.textContent = "Shipyard"
             $main = gallery.getContainer();
         } else if (player === "Player") {
             $main = playerGrid.getContainer();
