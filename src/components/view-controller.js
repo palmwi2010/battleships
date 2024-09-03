@@ -20,6 +20,7 @@ class ViewController {
         this.body = document.querySelector('body');
         this.body.style.backgroundImage = `url(${bodyBackground})`;
         this.deploymentPhase = true;
+        this.popupController = PopupDialog(this);
         renderFooter();
     }
 
@@ -58,6 +59,7 @@ class ViewController {
     }
 
     initDeployment() {
+        setTimeout(() => this.popupController.renderInfo().showModal(), 1000);
         this.deploymentPhase = true;
         this.renderGame();
     }
@@ -84,8 +86,7 @@ class ViewController {
     }
 
     showGameOver(gameResult) {
-        const popupController = PopupDialog(this);
-        const dialog = popupController.renderGameOver(gameResult);
+        const dialog = this.popupController.renderGameOver(gameResult);
         dialog.showModal();
     }
 }

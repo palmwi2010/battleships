@@ -24,13 +24,13 @@ body {
 }
 
 :root {
-    --box-size: 50px;
+    --box-size: 45px;
     --grid-color: #64748b;
     --grid-highlight: #455f85;
-    --fisher-width: 30px;
-    --galley-width: 38px;
-    --frigate-width: 45px;
-    --destroyer-width: 55px;
+    --fisher-width: calc(var(--box-size) * 0.7);
+    --galley-width: calc(var(--box-size) * 0.8);
+    --frigate-width: calc(var(--box-size) * 0.9);
+    --destroyer-width: var(--box-size);
     --ship-height-margin: 0px;
 }
 
@@ -101,14 +101,14 @@ body {
 }
 
 /* Game over */
-.game-dialog {
+.game-dialog, .info-dialog {
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -20%);
 }
 
-.game-dialog::backdrop {
+.game-dialog::backdrop, .info-dialog::backdrop {
     background: rgba(1, 11, 46, 0.5);
 }
 
@@ -129,7 +129,9 @@ body {
 
 /* Header styling */
 .top-banner {
-    display: grid;
+    display: flex;
+    flex-direction: column;
+    gap:20px;
     align-items: center;
     justify-content: center;
     padding: 20px 0;
@@ -388,4 +390,66 @@ body {
 
 .odin-img {
     height:20px;
+}
+
+/* Info modal */
+.banner-subheader {
+    padding: 16px 40px;
+    border-radius: 20px;
+    background-color:#0c4a6e;
+    box-shadow: 6px 6px 10px 0 black;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.subheader-title {
+    color:white;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.subheader-info {
+    color:white;
+    font-size: 20px;
+}
+
+/* Game over */
+.info-dialog {
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -20%);
+}
+
+
+.info-dialog {
+    background-color: #082f49;
+    border-radius: 50px;
+    width: fit-content;
+    height: 250px;
+    padding: 50px 20px;
+    border: none;
+    outline: none;
+    box-shadow: 2px 2px 6px 2px black;
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    align-items: center;
+}
+
+.confirm-btn {
+    margin-top: auto;
+    background-color: #16a34a;
+    border: 2px solid white;
+    width:30px;
+    box-sizing: content-box;
+    padding: 8px;
+    border-radius: 50%;
+    transition-duration: 0.3s;
+}
+
+.confirm-btn:hover {
+    cursor: pointer;
+    background-color: #4ade80;
 }

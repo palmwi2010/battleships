@@ -1,4 +1,5 @@
 import Game from "./game";
+import checkImg from "../assets/check.svg";
 
 export default function PopupDialog(controller) {
 
@@ -15,6 +16,33 @@ export default function PopupDialog(controller) {
         buttonContainer.appendChild(buttonItems);
 
         return buttonContainer;
+    }
+
+    function renderInfo() {
+        const $dialog = document.createElement("dialog");
+        $dialog.className = "info-dialog";
+ 
+        const subHeaderTitle = document.createElement("p");
+        const subHeaderInfo = document.createElement("p");
+        const confirmButton = document.createElement("img")
+        confirmButton.src = checkImg;
+        confirmButton.alt = "Confirm button";
+        confirmButton.className = "confirm-btn";
+        confirmButton.addEventListener("click", () => $dialog.remove());
+
+        subHeaderTitle.className = "subheader-title";
+        subHeaderInfo.className = "subheader-info";
+
+        subHeaderTitle.textContent = "Deployment";
+        subHeaderInfo.textContent = "Drag and drop your ships, and click to turn";
+
+        $dialog.appendChild(subHeaderTitle);
+        $dialog.appendChild(subHeaderInfo);
+        $dialog.appendChild(confirmButton);
+
+        document.body.appendChild($dialog);
+
+        return $dialog;
     }
 
     function renderGameOver(gameResult = 0) {
@@ -89,5 +117,5 @@ export default function PopupDialog(controller) {
         controller.initDeployment();
     }
 
-    return { renderLaunchScreen, renderGameOver }
+    return { renderLaunchScreen, renderGameOver, renderInfo }
 }

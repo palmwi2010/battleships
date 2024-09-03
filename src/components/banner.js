@@ -6,8 +6,8 @@ export default function Banner() {
     
         const header = document.createElement("h1");
         header.className = "header-text";
-        header.textContent = "battleships"
- 
+        header.textContent = "battleships";
+
         banner.appendChild(header);
         return banner;
     }
