@@ -59,7 +59,7 @@ class ViewController {
     }
 
     initDeployment() {
-        setTimeout(() => this.popupController.renderInfo().showModal(), 1000);
+        setTimeout(() => this.popupController.renderInfo(), 700);
         this.deploymentPhase = true;
         this.renderGame();
     }

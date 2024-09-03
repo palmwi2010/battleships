@@ -108,7 +108,7 @@ body {
     transform: translate(-50%, -20%);
 }
 
-.game-dialog::backdrop, .info-dialog::backdrop {
+.game-dialog::backdrop {
     background: rgba(1, 11, 46, 0.5);
 }
 
@@ -436,6 +436,12 @@ body {
     flex-direction: column;
     gap:10px;
     align-items: center;
+    opacity: 0;
+    transition-duration: 0.5s;
+}
+
+#active-info {
+    opacity: 1;
 }
 
 .confirm-btn {

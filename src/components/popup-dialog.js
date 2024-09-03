@@ -41,6 +41,8 @@ export default function PopupDialog(controller) {
         $dialog.appendChild(confirmButton);
 
         document.body.appendChild($dialog);
+        $dialog.showModal();
+        $dialog.id = "active-info";
 
         return $dialog;
     }
