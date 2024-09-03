@@ -19,7 +19,7 @@ body {
     background-color: black;
     position: relative;
     display: grid;
-    grid-template-rows: 1fr 5fr 10fr 24px;
+    grid-template-rows: 1fr 5fr 2fr 24px;
     /* background-image: url('../assets/battle-background.webp'); */
 }
 
@@ -33,6 +33,20 @@ body {
     --destroyer-width: var(--box-size);
     --ship-height-margin: 0px;
 }
+
+@media (max-width: 1500px) {
+    :root {
+        --box-size: 35px;
+    }
+}
+
+@media (max-width: 1050px) {
+    :root {
+        --box-size: 30px;
+    }
+}
+
+
 
 /* Start screen */
 .welcome-container {
@@ -170,7 +184,6 @@ body {
 
 .box, .coordinate {
     max-width: 55px;
-    flex:1;
     aspect-ratio: 1;
 }
 
@@ -283,7 +296,7 @@ body {
     grid-template-rows: 1fr 1fr;
     grid-template-columns: repeat(6, 1fr);
     align-items: center;
-    width: 600px;
+    width: calc(11*var(--box-size));
     height: calc(10*var(--box-size));
     border-radius: 20px;
     background: radial-gradient(
@@ -351,7 +364,7 @@ body {
 .button-container {
     grid-row: 3/4;
     margin: 0 auto;
-    padding: 20px;
+    padding: 40px;
 }
 
 .start-btn {
@@ -458,4 +471,16 @@ body {
 .confirm-btn:hover {
     cursor: pointer;
     background-color: #4ade80;
+}
+
+@media (max-width: 700px) {
+    .game-container {
+        flex-direction: column;
+        gap:50px;
+        align-items: center;
+    }
+
+    .header-text {
+        font-size: 80px;
+    }
 }
